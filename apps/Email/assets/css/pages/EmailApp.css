@@ -1,0 +1,6 @@
+.emails-main-display {
+  display: flex;
+}
+.email-greet {
+  text-align: center;
+}

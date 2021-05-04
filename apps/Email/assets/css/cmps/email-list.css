@@ -1,0 +1,14 @@
+.email-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 80%;
+  border: solid 1px black;
+  height: 700px;
+  overflow: auto;
+}
+
+.email-preview {
+  min-height: 150px;
+  border: solid 1px black;
+}
