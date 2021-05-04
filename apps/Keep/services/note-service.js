@@ -17,6 +17,60 @@ let gNotes = [
             backgroundColor: '#ffffff',
             color: 'black'
         }
+    },
+    {
+        id: utilService.makeId(),
+        type: 'NoteVideo',
+        isPinned: false,
+        info: {
+            url: 'https://www.youtube.com/watch?v=8ucz_pm3LX8',
+            title: '',
+            videoId: '8ucz_pm3LX8'
+        },
+        style: {
+            backgroundColor: '#121212',
+            color:'#ffffff'
+        }
+    },
+    {
+        id: utilService.makeId(),
+        type: 'NoteTodo',
+        isPinned: false,
+        info: {
+            label: 'Todos',
+            todos: [{
+                txt:'sleep',
+                id:utilService.makeId(),
+                doneAt:null
+            },
+            {
+                txt:'Finish This Sprint',
+                id:utilService.makeId(),
+                doneAt:null
+            },
+            {
+                txt:`Don't Forget to eat (again)`,
+                id:utilService.makeId(),
+                doneAt:null
+            }
+            ]
+        },
+        style: {
+            backgroundColor: '#ffffff',
+        }
+
+    },
+    {
+        id: utilService.makeId(),
+        type: 'NoteImg',
+        isPinned: false,
+        info: {
+            url: 'https://static01.nyt.com/images/2020/05/16/business/16JORDAN-01sub/16JORDAN-01sub-superJumbo.jpg',
+            title: ''
+        },
+        style: {
+            backgroundColor: '#ffffff',
+        }
     }
 ]
 
@@ -44,7 +98,7 @@ function _addNote(note) {
     switch (note.type) {
         case 'NoteImg': return _createImgNote(note)
         case 'NoteTodo': return _createTodoNote(note)
-        case 'NoteVideo':return _createTofoVideo(note)
+        case 'NoteVideo': return _createVideoNote(note)
         default: return _createTextNote(note)
     }
 }
@@ -85,34 +139,41 @@ function _createImgNote(note) {
 }
 function _createTodoNote(note) {
     const todos = note.txt.split(',');
-    addedNote = {
+    const addedNote = {
         id: utilService.makeId(),
         type: 'NoteTodo',
         isPinned: false,
         info: {
-            label:'Todos',
-            todos: todos.map(todo=>{
-               return {txt:todo,doneAt:null}
-            }),
-             style: {
-                backgroundColor: '#ffffff',
-            }
+            label: 'Todos',
+            todos: todos.map(todo => {
+                return {
+                    id: utilService.makeId(),
+                    txt: todo,
+                    doneAt: null
+                }
+            })
+        },
+        style: {
+            backgroundColor: '#ffffff',
         }
+
     }
     gNotes.unshift(addedNote)
     return Promise.resolve()
 }
-function _createVideoNote(note){
-    if(!note.txt.startsWith('https://www.youtube.com/')) Promise.reject('Wrong Url for Video')
-    
+function _createVideoNote(note) {
+    if (!note.txt.startsWith('https://www.youtube.com/')) return Promise.reject('Wrong Url for Video')
+    const idIdx = note.txt.search('v=')
+    if (idIdx === -1) return Promise.reject('could not find the video')
 
     const addedNote = {
         id: utilService.makeId(),
-        type: 'NoteImg',
+        type: 'NoteVideo',
         isPinned: false,
         info: {
             url: note.txt,
-            title: ''
+            title: '',
+            videoId: note.txt.substring(idIdx + 2)
         },
         style: {
             backgroundColor: '#ffffff',
@@ -122,9 +183,9 @@ function _createVideoNote(note){
     return Promise.resolve()
 }
 
-    function removeNoteById(noteId) {
-        const noteIdx = gNotes.findIndex(note => note.id === noteId)
-        gNotes.splice(noteIdx, 1);
-        return Promise.resolve()
-    }
+function removeNoteById(noteId) {
+    const noteIdx = gNotes.findIndex(note => note.id === noteId)
+    gNotes.splice(noteIdx, 1);
+    return Promise.resolve()
+}
 

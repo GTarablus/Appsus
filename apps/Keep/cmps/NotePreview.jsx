@@ -1,5 +1,7 @@
 import { NoteText } from './NoteText.jsx'
 import {NoteImg} from './NoteImg.jsx'
+import {NoteVideo} from './NoteVideo.jsx'
+import {NoteTodo} from './NoteTodo.jsx'
 export class NotePreview extends React.Component {
 
     //the dynamic component
@@ -53,7 +55,7 @@ export class NotePreview extends React.Component {
         const { note, onRemoveNote } = this.props
         const { isEdit, txtEdit } = this.state
         return <div className="note-preview" style={{backgroundColor:backgroundColor}}>
-            <DynamicCmp note={note}/>
+            <DynamicCmp note={note}{...this.props}/>
             {/* {(isEdit) ?
                 <textarea name="txtEdit" id="" cols="" rows="" value={txtEdit} onChange={this.handleChange}></textarea>
                 : note.info.txt} */}
@@ -82,8 +84,10 @@ const DynamicCmp = (props) => {
         return <NoteText {...props} />
       case 'NoteImg':
         return <NoteImg {...props} />
-    //   case 'NoteTodo':
-    //     return <NoteTodo {...props} />
+        case 'NoteVideo':
+            return<NoteVideo {...props}/>
+      case 'NoteTodo':
+        return <NoteTodo {...props} />
     //   default:
     //     return //...some default error view
     }
