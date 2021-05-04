@@ -4,7 +4,19 @@
   font-size: larger;
   height: 700px;
 }
-
+.menu-actions {
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  justify-content: space-between;
+}
+.menu-actions li:hover {
+  border: black 1px solid;
+  cursor: pointer;
+}
+.menu-actions li {
+  margin: 5px;
+}
 .clean-list {
   list-style: none;
   padding: 0;

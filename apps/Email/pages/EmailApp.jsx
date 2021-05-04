@@ -1,6 +1,7 @@
 const { Route, Switch } = ReactRouterDOM;
 import { EmailMenu } from '../cmps/EmailMenu.jsx';
 import { EmailList } from '../cmps/EmailList.jsx';
+import { EmailDetails } from '../cmps/EmailDetails.jsx';
 import { emailService } from '../services/email-service.js';
 
 export class EmailApp extends React.Component {
@@ -36,7 +37,7 @@ export class EmailApp extends React.Component {
         <div className="emails-main-display">
           <EmailMenu />
           <Switch>
-            {/* <Route path="/email/:id" component={EmailDetails} /> */}
+            <Route path="/email/:id" component={EmailDetails} />
             <Route
               path="/email"
               render={(props) => <EmailList {...props} emails={emails} />}

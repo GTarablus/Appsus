@@ -1,4 +1,9 @@
 @import './cmps/email-menu.css';
 @import './cmps/email-list.css';
 @import './cmps/email-preview.css';
+@import './cmps/email-details.css';
 @import './pages/EmailApp.css';
+
+* {
+  box-sizing: border-box;
+}

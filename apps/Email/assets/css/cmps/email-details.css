@@ -1,4 +1,4 @@
-.email-list {
+.email-details {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -7,9 +7,7 @@
   height: 700px;
   overflow: auto;
 }
-a:hover,
-a:visited,
-a:link,
-a:active {
-  text-decoration: none;
+
+.email-details button {
+  align-self: flex-start;
 }

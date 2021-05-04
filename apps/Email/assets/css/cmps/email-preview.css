@@ -3,8 +3,14 @@
   border: solid 1px black;
 }
 
+.email-preview:hover {
+  cursor: pointer;
+  box-shadow: 0 0px 3px 2px #7e7d7d78;
+}
 .email-preview * {
   margin: 5px;
+  text-decoration: none;
+  color: black;
 }
 
 /* .email-preview h2,

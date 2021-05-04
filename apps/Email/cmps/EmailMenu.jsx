@@ -2,7 +2,7 @@ export class EmailMenu extends React.Component {
   render() {
     return (
       <div className="email-menu">
-        <ul className="clean-list">
+        <ul className="menu-actions clean-list">
           <li>Inbox</li>
           <li>Outbox</li>
           <li>Drafts</li>

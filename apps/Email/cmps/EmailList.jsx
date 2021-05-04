@@ -5,7 +5,7 @@ export function EmailList({ emails }) {
     return (
       <div className="email-list">
         {emails.map((email) => (
-          <EmailPreview email={email} key={email.subject} />
+          <EmailPreview email={email} key={email.id} />
         ))}
       </div>
     );
