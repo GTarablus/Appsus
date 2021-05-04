@@ -3,3 +3,6 @@
     margin:0px auto;
     display: block;
 }
+#root{
+    min-height: 100vh;
+}

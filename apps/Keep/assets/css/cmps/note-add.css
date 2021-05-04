@@ -10,3 +10,6 @@
     font-size: 1.2rem;
     padding: 8px;
 }
+.note-add-container input[type="radio"]{
+    opacity: 0;
+}

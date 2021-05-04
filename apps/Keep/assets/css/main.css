@@ -2,6 +2,8 @@
 @import './pages/KeepApp.css';
 
 /* CMPS */
-@import './cmps/note-preview.css';
 @import './cmps/note-add.css';
+@import './cmps/notes-list.css';
+@import './cmps/note-preview.css';
+@import './cmps/todo-list.css';
 @import './cmps/todo-preview.css';

@@ -1,8 +1,17 @@
 .note-preview{
-    border: 1px solid black; 
+    border: 1px solid rgb(212, 212, 212); 
     padding:40px 10px;
-    width: 20%;
+    margin-inline-end: 3%;
     text-align: center;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom:0.5rem ;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+.note-preview:hover{
+   box-shadow:  0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+   cursor: pointer;
 }
 input[type="color"]{
     opacity: 0;
