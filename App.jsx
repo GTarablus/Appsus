@@ -11,6 +11,7 @@ export function App() {
       <header>
         <Link to="/"> Home</Link>
         <Link to="/email"> Email</Link>
+        <Link to="/keep">keep</Link>
       </header>
       <Switch>
         <Route component={EmailApp} path="/email" />
