@@ -7,8 +7,3 @@
   height: 700px;
   overflow: auto;
 }
-
-.email-preview {
-  min-height: 150px;
-  border: solid 1px black;
-}

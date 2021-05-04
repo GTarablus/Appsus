@@ -1,0 +1,13 @@
+.email-preview {
+  min-height: 175px;
+  border: solid 1px black;
+}
+
+.email-preview * {
+  margin: 5px;
+}
+
+/* .email-preview h2,
+h3 {
+  margin: 5px;
+} */

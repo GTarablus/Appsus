@@ -1,16 +1,18 @@
-import { emailService } from '../services/email-service.js';
+import { EmailPreview } from './EmailPreview.jsx';
 
-export class EmailList extends React.Component {
-  render() {
+export function EmailList({ emails }) {
+  if (emails.length > 0) {
     return (
       <div className="email-list">
-        <div className="email-preview">Email Preview</div>
-        <div className="email-preview">Email Preview</div>
-        <div className="email-preview">Email Preview</div>
-        <div className="email-preview">Email Preview</div>
-        <div className="email-preview">Email Preview</div>
-        <div className="email-preview">Email Preview</div>
-        <div className="email-preview">Email Preview</div>
+        {emails.map((email) => (
+          <EmailPreview email={email} key={email.subject} />
+        ))}
+      </div>
+    );
+  } else {
+    return (
+      <div className="email-list">
+        <h1>Your inbox is empty!</h1>
       </div>
     );
   }
