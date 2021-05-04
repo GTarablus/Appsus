@@ -19,8 +19,8 @@ loadNotes=()=>{
     noteService.removeNoteById(id).then(()=>this.loadNotes())
   }
 
-  onAddNote=(note)=>{
-    noteService.addNote(note).then(()=>this.loadNotes())
+  onSaveNote=(note)=>{
+    noteService.saveNote(note).then(()=>this.loadNotes())
   }
 
   render() {
@@ -29,8 +29,8 @@ loadNotes=()=>{
     return (
       <section className="main-container">
         <h1>this is the keepApp </h1>
-        <NoteAdd onAddNote={this.onAddNote}/>
-      <NotesList notes={notes} onRemoveNote={this.onRemoveNote}/>
+        <NoteAdd onSaveNote={this.onSaveNote}/>
+      <NotesList notes={notes} onSaveNote={this.onSaveNote} onRemoveNote={this.onRemoveNote}/>
       </section>
     );
   }

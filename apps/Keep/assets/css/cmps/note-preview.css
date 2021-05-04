@@ -4,3 +4,10 @@
     width: 20%;
     text-align: center;
 }
+input[type="color"]{
+    opacity: 0;
+}
+.note-preview img{
+    max-width: 100%;
+    object-fit: contain;
+}
