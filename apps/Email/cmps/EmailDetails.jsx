@@ -4,23 +4,40 @@ export class EmailDetails extends React.Component {
   state = {
     emailId: this.props.match.params.id,
     email: null,
+    isRead: null,
   };
 
   componentDidMount() {
-    this.getEmail();
+    this.getEmail().then(() => {
+      this.getReadState();
+    });
   }
   getEmail() {
     const { emailId } = this.state;
     emailService
       .getEmailById(emailId)
       .then((email) => this.setState({ email }));
+    return Promise.resolve();
   }
+
+  getReadState() {
+    if (!this.state.email) return;
+    this.setState({ isRead: this.state.email.isRead });
+  }
+
+  toggleRead() {
+    const { isRead } = this.state;
+    if (isRead) this.setState({ isRead: false });
+    else this.setState({ isRead: true });
+    emailService.setReadState(this.state.isRead, this.state.emailId);
+  }
+
   render() {
-    const { email } = this.state;
+    const { email, isRead } = this.state;
     if (!email) {
       return (
         <section>
-          <h1>Loading you Email...</h1>
+          <h1>Loading your Email...</h1>
         </section>
       );
     }
@@ -34,6 +51,15 @@ export class EmailDetails extends React.Component {
         <div>
           <p>{email.body}</p>
           <h3>{utilService.getTimeFromStamp(email.sentAt)}</h3>
+        </div>
+        <div className="email-actions">
+          <button>Reply</button>
+          <button>Forward</button>
+          <button>Forward All</button>
+          <button>Delete</button>
+          <button onClick={() => this.toggleRead()}>{`Mark as ${
+            isRead ? 'unread' : 'read'
+          }`}</button>
         </div>
       </div>
     );

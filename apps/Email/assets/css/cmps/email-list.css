@@ -3,10 +3,10 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 80%;
-  border: solid 1px black;
-  height: 700px;
+  height: auto;
   overflow: auto;
 }
+
 a:hover,
 a:visited,
 a:link,

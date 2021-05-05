@@ -1,7 +1,19 @@
 import { utilService } from '../../../services/util-service.js';
 import { storageService } from '../../../services/storage-service.js';
 const KEY = 'emails';
+var box = 'inbox';
 var gEmails = getEmails();
+var outboxEmails = [
+  {
+    id: utilService.makeId(),
+    sender: 'Kratos of Sparta',
+    subject: 'OutBoxTest',
+    body:
+      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
+    isRead: false,
+    sentAt: 1549312452,
+  },
+];
 
 function getEmails() {
   var fromStorage = storageService.loadFromStorage(KEY);
@@ -66,12 +78,28 @@ function getEmailById(id) {
   return Promise.resolve(email);
 }
 
-export const emailService = {
-  query,
-  getEmailById,
-};
-function query() {
-  return Promise.resolve(gEmails);
+function setReadState(bool, id) {
+  var idx = gEmails.findIndex((email) => {
+    return email.id === id;
+  });
+  gEmails[idx].isRead = !bool;
+  storageService.saveToStorage(KEY, gEmails);
 }
 
-utilService.getTimeFromStamp(gEmails[0].sentAt);
+function setEmailBox(string) {
+  box = string;
+}
+
+export const emailService = {
+  gEmails,
+  query,
+  getEmailById,
+  setReadState,
+  setEmailBox,
+};
+function query() {
+  var emails;
+  if (box === 'inbox') emails = gEmails;
+  else if (box === 'outbox') emails = outboxEmails;
+  return Promise.resolve(emails);
+}

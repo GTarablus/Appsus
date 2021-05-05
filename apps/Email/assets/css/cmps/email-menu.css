@@ -2,7 +2,7 @@
   width: 20%;
   border: 1px black solid;
   font-size: larger;
-  height: 700px;
+  height: auto;
 }
 .menu-actions {
   display: flex;
