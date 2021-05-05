@@ -1,7 +1,6 @@
 import { utilService } from '../../../services/util-service.js';
 import { storageService } from '../../../services/storage-service.js';
 const KEY = 'emails';
-var box = 'inbox';
 var gEmails = getEmails();
 var outboxEmails = [
   {
@@ -71,6 +70,14 @@ function getEmails() {
   }
 }
 
+function _getIdxById(id) {
+  return gEmails.findIndex((email) => email.id === id);
+}
+
+function query() {
+  return Promise.resolve(gEmails);
+}
+
 function getEmailById(id) {
   var email = gEmails.find((email) => {
     return email.id === id;
@@ -78,16 +85,19 @@ function getEmailById(id) {
   return Promise.resolve(email);
 }
 
-function setReadState(bool, id) {
-  var idx = gEmails.findIndex((email) => {
-    return email.id === id;
-  });
-  gEmails[idx].isRead = !bool;
+function deleteEmail(id) {
+  const idx = _getIdxById(id);
+  if (gEmails[idx].isTrash) gEmails.splice(idx, 1);
+  else gEmails[idx].isTrash = true;
   storageService.saveToStorage(KEY, gEmails);
+  return Promise.resolve();
 }
 
-function setEmailBox(string) {
-  box = string;
+function setReadState(id) {
+  const idx = _getIdxById(id);
+  gEmails[idx].isRead = !gEmails[idx].isRead;
+  storageService.saveToStorage(KEY, gEmails);
+  return Promise.resolve();
 }
 
 export const emailService = {
@@ -95,11 +105,5 @@ export const emailService = {
   query,
   getEmailById,
   setReadState,
-  setEmailBox,
+  deleteEmail,
 };
-function query() {
-  var emails;
-  if (box === 'inbox') emails = gEmails;
-  else if (box === 'outbox') emails = outboxEmails;
-  return Promise.resolve(emails);
-}
