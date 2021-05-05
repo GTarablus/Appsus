@@ -3,17 +3,19 @@ export const noteService = {
     query,
     saveNote,
     removeNoteById,
-    getNoteById
+    getNoteById,
+    updateNoteStyleById
 }
 
 let gNotes = [
     {
         id: utilService.makeId(),
         isPinned: true,
-        infos:[ {
-            type: 'NoteText',
+        title:'',
+        type: 'NoteText',
+        info: {
             txt: 'Fullstack Me Baby!'
-        }],
+        },
         style: {
             backgroundColor: '#ffffff',
             color: 'black'
@@ -21,14 +23,14 @@ let gNotes = [
     },
     {
         id: utilService.makeId(),
-       
+        title:'',
         isPinned: false,
-        infos: [{
-            type: 'NoteVideo',
+        type: 'NoteVideo',
+        info: {
             url: 'https://www.youtube.com/watch?v=8ucz_pm3LX8',
             title: '',
             videoId: '8ucz_pm3LX8'
-        }],
+        },
         style: {
             backgroundColor: '#121212',
             color: '#ffffff'
@@ -37,9 +39,10 @@ let gNotes = [
     {
         id: utilService.makeId(),
         label: 'Todos',
+        type: 'NoteTodo',
+        title:'',
         isPinned: false,
-        infos: [{
-            type: 'NoteTodo',
+        info: {
             todos: [{
                 txt: 'sleep',
                 id: utilService.makeId(),
@@ -56,7 +59,7 @@ let gNotes = [
                 doneAt: null
             }
             ]
-        }],
+        },
         style: {
             backgroundColor: '#ffffff',
         }
@@ -64,13 +67,14 @@ let gNotes = [
     },
     {
         id: utilService.makeId(),
-      
+        type: 'NoteImg',
+        title:'',
         isPinned: false,
-        infos: [{
+        info: {
             type: 'NoteImg',
             imgUrl: 'https://static01.nyt.com/images/2020/05/16/business/16JORDAN-01sub/16JORDAN-01sub-superJumbo.jpg',
             title: ''
-        }],
+        },
         style: {
             backgroundColor: '#ffffff',
         }
@@ -102,12 +106,13 @@ function _updateNote(noteToUpdate) {
 
 
 function _addNote(note) {
-
     const addedNote = {
         id: utilService.makeId(),
+        title:'',
         label: '',
+        type: note.type,
         isPinned: false,
-        infos: [_createNoteInfo(note)],
+        info: _createNoteInfo(note),
         style: {
             backgroundColor: '#ffffff',
             color: 'black'
@@ -117,6 +122,14 @@ function _addNote(note) {
     return Promise.resolve()
 
 
+}
+function updateNoteStyleById(noteId,style){
+     console.log('in update style')
+    console.log(style)
+   const note= gNotes.find(note=>noteId===note.id)
+   console.log(note)
+   note.style=style;
+    return Promise.resolve()
 }
 function _createNoteInfo(note) {
     switch (note.type) {
@@ -128,8 +141,6 @@ function _createNoteInfo(note) {
 }
 function _createTextInfo(note) {
     const addedInfo = {
-        type:'NoteText',
-        title: '',
         txt: note.txt
     }
     return addedInfo;
@@ -137,17 +148,13 @@ function _createTextInfo(note) {
 
 function _createImgInfo(note) {
     const addedInfo = {
-        type:'NoteImg',
         imgUrl: note.txt,
-        title: ''
     }
     return addedInfo;
 }
 function _createTodoInfo(note) {
     const todos = note.txt.split(',');
     const addedInfo = {
-        title:'',
-            type:'NoteTodo',
             todos: todos.map(todo => {
                 return {
                     id: utilService.makeId(),
@@ -163,12 +170,9 @@ function _createVideoInfo(note) {
     const idIdx = note.txt.search('v=')
     if (idIdx === -1) return Promise.reject('could not find the video')
     const addedInfo = {
-        title:'',
-            type: 'NoteVideo',
             url: note.txt,
             videoId: note.txt.substring(idIdx + 2)
     }
-   
     return addedInfo;
 }
 

@@ -12,7 +12,7 @@
     flex-direction: column;
 }
 
-.edit-note input[type="text"]{
+.edit-note>input[type="text"]{
     padding: 1rem 1.25rem;
     font-size: 1.5rem;
     font-weight: 600;

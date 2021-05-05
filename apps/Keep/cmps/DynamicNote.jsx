@@ -3,28 +3,20 @@ import { NoteImg } from './NoteImg.jsx'
 import { NoteVideo } from './NoteVideo.jsx'
 import { NoteTodo } from './NoteTodo.jsx'
 export const DynamicNote = (props) => {
-    const { info } = props.note
+    
 
-
-    switch (props.info.type) {
+    switch (props.note.type) {
         case 'NoteText':
-            return <NoteText {...props} />
+            return <NoteText info={props.note.info} />
         case 'NoteImg':
-            return <NoteImg {...props} />
+            return <NoteImg info={props.note.info}  />
         case 'NoteVideo':
-            return <NoteVideo {...props} />
+            return <NoteVideo  info={props.note.info}/>
         case 'NoteTodo':
-            return <NoteTodo {...props} />
+            return <NoteTodo info={props.note.info} {...props} />
         //   default:
         //     return //...some default error view
     }
-    return <div>
-
-        {info.txt && <NoteText {...props} />}
-        {info.imgUrl && <NoteImg {...props} />}
-        {info.videoId && <NoteVideo {...props} />}
-        {info.todos && <NoteTodo {...props} />}
-    </div>
-
+   
 
 }

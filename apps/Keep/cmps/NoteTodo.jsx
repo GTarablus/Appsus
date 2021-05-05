@@ -32,7 +32,7 @@ export class NoteTodo extends React.Component{
         this.setState(prevState=>({
             note:{
                 ...prevState.note,
-                info:{
+                infos:{
                     ...prevState.note.info,
                     todos:updatedTodos
                 }
@@ -60,7 +60,7 @@ export class NoteTodo extends React.Component{
         if(!note) return <div>loading</div>
         return <div className="note-todo">
             <TodoList todos={todos} onToggleTodo={this.onToggleTodo} onAddTodo={this.onAddTodo} onRemoveTodo={this.onRemoveTodo} />
-            <input type="text" value={inputTodoTxt} onChange={this.handleChange}/>
+            <input type="text" value={inputTodoTxt} onChange={this.handleChange} placeholder="add an item to your list..."/>
             <button onClick={this.onAddTodo}>Add</button>
         </div>
     }

@@ -5,18 +5,18 @@ import { IconPalette } from './icon-cmps/IconPalette.jsx'
 import { IconText } from './icon-cmps/IconText.jsx'
 import { IconVideo } from './icon-cmps/IconVideo.jsx'
 import { IconTodo } from './icon-cmps/IconTodo.jsx'
-import {eventBusService} from '../../../services/event-bus-service.js'
+import { eventBusService } from '../../../services/event-bus-service.js'
 export class EditNote extends React.Component {
 
     state = {
         note: null,
-        infos:null,
-        style:null,
-            
-        
+        type: null,
+        style: null,
+        txt: null,
     }
     componentDidMount() {
         const noteId = this.props.match.params.noteId;
+        console.log(noteId)
         if (!noteId) this.props.history.push('/keep')
         noteService.getNoteById(noteId)
             .then(note => {
@@ -24,71 +24,59 @@ export class EditNote extends React.Component {
                     this.props.history.push('/keep')
                     return
                 }
-                this.setState({ note, infos: note.info,style:note.style })
-
+                console.log(note)
+                this.setState({ note, type: note.type, style: note.style })
             })
             .catch(err => { })
     }
     onSubmitEdit = () => {
         console.log('on submit')
         this.setState(prevState => ({
-            note:{
+            note: {
                 ...prevState.note,
-                infos:this.state.info,
-                style:this.state.style
-            }
-        }),() =>{
-            eventBusService.emit('save-note',this.state.note)
+                type: this.state.type,
+                style: this.state.style
+            },
+
+        }), () => {
+            console.log(this.state.note)
+            eventBusService.emit('save-note', this.state.note)
             this.onCloseEdit()
-         } )
+        })
     }
     onCloseEdit = () => {
         this.props.history.push('/keep')
     }
     handleChange = ({ target }) => {
+        console.log(target.value)
         const field = target.name
         const value = target.value
-        const parent=target.dataset.parent
-        console.log(value,field,parent)
         this.setState(prevState => ({
-          ...prevState,
-            [parent]: {
-                ...prevState[parent],
-                [field]: value
+            ...prevState,
+            style:{
+                [field]: value,
             }
-        }
-        ))
+        }))
     }
-    
+
+
+
     render() {
-        const { note, info ,style} = this.state
+        const { note, style } = this.state
         if (!note) return null
         return <div className="edit-note" style={style}>
             <input type="text" placeholder="Enter Your Title" />
             <div className="edit-content">
-            {note.infos.map(info=>{
-                if(info.type === 'NoteText'){
-                   return  <textarea value={info.txt} name="txt" data-parent="info" onChange={this.handleChange}></textarea>
-                }
-               return <DynamicNote  info={info} note={note}{...this.props} />
-            })}
-
-                    
+                {(note.type === 'NoteText') ?
+                    <textarea value={note.info.txt} name="txt" onChange={this.handleChange}></textarea>
+                    : <DynamicNote info={note.info} note={note}{...this.props} />}
             </div>
             <div className="edit-btns">
-                <button>
-                <IconImage />
-                </button>
-                <IconPalette  note={note} handleChange={this.handleChange}/>
-                <button onClick={this}>
-                <IconText />
-                </button>
-               <button>
-                <IconTodo  />
-                   </button> 
-                <button>
-                <IconVideo />
-                </button>
+                <button onClick={() => onAddInfo('image')}><IconImage /></button>
+                <IconPalette note={note} style={this.state.style} updateColor={this.handleChange} />
+                <button onClick={this.handleChange}><IconText /></button>
+                <button><IconTodo /> </button>
+                <button><IconVideo /></button>
             </div>
             <div className="action-btns">
                 <button onClick={this.onCloseEdit}>Cancel</button>

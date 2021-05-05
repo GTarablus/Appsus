@@ -14,6 +14,10 @@ export class KeepApp extends React.Component {
   componentDidMount(){
     this.loadNotes()
     this.removeEvent = eventBusService.on('save-note', (note) =>this.onSaveNote(note))
+    eventBusService.on('update-style',({noteId,style})=>{
+      noteService.updateNoteStyleById(noteId,style)
+      .then(()=>this.loadNotes())
+    })
   }
 
   componentWillUnmount(){
@@ -27,9 +31,14 @@ loadNotes=()=>{
     noteService.removeNoteById(id).then(()=>this.loadNotes())
   }
 
+  
+
   onSaveNote=(note)=>{
     noteService.saveNote(note).then(()=>this.loadNotes())
   }
+  //on update color 
+
+
 
   render() {
     const{notes}=this.state
