@@ -3,6 +3,7 @@
   border: 1px black solid;
   font-size: larger;
   height: auto;
+  background-color: rgba(121, 168, 255, 0.795);
 }
 .menu-actions {
   display: flex;

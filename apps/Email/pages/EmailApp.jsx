@@ -29,6 +29,13 @@ export class EmailApp extends React.Component {
     emailService.deleteEmail(emailId).then(this.loadEmails);
   };
 
+  onRestoreEmail = (emailId) => {
+    emailService.restoreEmail(emailId).then(this.loadEmails);
+  };
+
+  onStarEmail = (emailId) => {
+    emailService.starEmail(emailId).then(this.loadEmails);
+  };
   onSetView = (view) => {
     this.setState({ view });
   };
@@ -37,6 +44,11 @@ export class EmailApp extends React.Component {
     const { emails, view } = this.state;
     if (view === 'inbox') return emails.filter((email) => !email.isTrash);
     else if (view === 'trash') return emails.filter((email) => email.isTrash);
+    else if (view === 'sent')
+      return emails.filter((email) => email.from === 'me');
+    else if (view === 'drafts') return emails.filter((email) => email.isDraft);
+    else if (view === 'starred')
+      return emails.filter((email) => email.isStarred);
   };
 
   render() {
@@ -63,9 +75,12 @@ export class EmailApp extends React.Component {
               render={(props) => (
                 <EmailList
                   {...props}
+                  view={this.state.view}
                   emails={this.setEmailsForDisplay()}
                   toggleRead={this.toggleRead}
                   onDeleteEmail={this.onDeleteEmail}
+                  onRestoreEmail={this.onRestoreEmail}
+                  onStarEmail={this.onStarEmail}
                 />
               )}
             />

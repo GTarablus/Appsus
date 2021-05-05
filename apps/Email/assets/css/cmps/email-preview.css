@@ -1,7 +1,6 @@
 .email-preview {
   height: 190px;
   border: solid 1px black;
-  background-color: rgb(212, 212, 212);
 }
 .email-preview * {
   margin: 5px;
@@ -11,7 +10,7 @@
 
 .email-preview:hover {
   cursor: pointer;
-  box-shadow: inset 0 0px 3px 6px #56a5ff78;
+  box-shadow: inset 0 0px 3px 6px #ffb0fb78;
   transition: 0.3s;
 }
 
@@ -23,7 +22,25 @@
   display: none;
 }
 
+.read {
+  background-color: inherit;
+}
+
 .unread {
+  box-shadow: inset 0 0px 3px 6px #56a5ff78;
   font-weight: bold;
   background-color: white;
+}
+
+.sender {
+  display: inline;
+}
+
+.from {
+  display: none;
+}
+
+.email-preview:hover .from {
+  display: inline;
+  color: #56a5ff78;
 }

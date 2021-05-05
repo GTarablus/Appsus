@@ -22,6 +22,7 @@ function getEmails() {
       {
         id: utilService.makeId(),
         sender: 'Kratos of Sparta',
+        from: 'godofwar@olympus.gov',
         subject: 'Email 1',
         body:
           'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
@@ -31,6 +32,7 @@ function getEmails() {
       {
         id: utilService.makeId(),
         sender: 'Peter Parker',
+        from: 'underoos@starkindustries.com',
         subject: 'Email 2',
         body:
           'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
@@ -40,6 +42,7 @@ function getEmails() {
       {
         id: utilService.makeId(),
         sender: 'Argaorn, son of Arathorn',
+        from: 'king@gondor.me',
         subject: 'Email 3',
         body:
           'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
@@ -49,6 +52,7 @@ function getEmails() {
       {
         id: utilService.makeId(),
         sender: 'Nemo Bemo',
+        from: 'hungry@feedme.now',
         subject: 'Email 4',
         body:
           'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
@@ -58,6 +62,7 @@ function getEmails() {
       {
         id: utilService.makeId(),
         sender: 'Tal Tarablus',
+        from: 'fatfuck@siblings.com',
         subject: 'Email 5',
         body:
           'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
@@ -93,9 +98,23 @@ function deleteEmail(id) {
   return Promise.resolve();
 }
 
+function restoreEmail(id) {
+  const idx = _getIdxById(id);
+  gEmails[idx].isTrash = false;
+  storageService.saveToStorage(KEY, gEmails);
+  return Promise.resolve();
+}
+
 function setReadState(id) {
   const idx = _getIdxById(id);
   gEmails[idx].isRead = !gEmails[idx].isRead;
+  storageService.saveToStorage(KEY, gEmails);
+  return Promise.resolve();
+}
+
+function starEmail(id) {
+  const idx = _getIdxById(id);
+  gEmails[idx].isStarred = true;
   storageService.saveToStorage(KEY, gEmails);
   return Promise.resolve();
 }
@@ -106,4 +125,6 @@ export const emailService = {
   getEmailById,
   setReadState,
   deleteEmail,
+  restoreEmail,
+  starEmail,
 };

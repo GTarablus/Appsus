@@ -5,6 +5,13 @@
   width: 80%;
   height: auto;
   overflow: auto;
+  background-color: rgba(187, 211, 255, 0.795);
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 a:hover,
