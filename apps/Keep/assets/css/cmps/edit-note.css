@@ -4,8 +4,8 @@
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: blanchedalmond;
-    border: 1px solid black;
+    box-shadow:  0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    border-radius:8px;
     z-index: 10;
     min-height: 30vh;
     display: flex;
@@ -16,11 +16,13 @@
     padding: 1rem 1.25rem;
     font-size: 1.5rem;
     font-weight: 600;
+   
+}
+.edit-note input[type="text"] , .edit-note textarea{
     border: none;
     outline: none;
     background-color: transparent;
 }
-
 .edit-note .edit-content {
     flex-grow: 1;
     display: flex;
@@ -38,8 +40,16 @@
 
 .edit-note .edit-btns svg {
     width:1.25rem;
+}
+.edit-note .icon-palette{
+    margin-inline-end: 1.5rem;
+}
+.edit-note .edit-btns button{
     margin-inline-end: 1.5rem;
     cursor: pointer;
+    padding: 0;
+    background-color: transparent;
+    border: none;
 }
 
 .edit-note svg:hover path {

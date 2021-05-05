@@ -9,11 +9,11 @@ export const noteService = {
 let gNotes = [
     {
         id: utilService.makeId(),
-        type: 'NoteText',
         isPinned: true,
-        info: {
+        infos:[ {
+            type: 'NoteText',
             txt: 'Fullstack Me Baby!'
-        },
+        }],
         style: {
             backgroundColor: '#ffffff',
             color: 'black'
@@ -21,41 +21,42 @@ let gNotes = [
     },
     {
         id: utilService.makeId(),
-        type: 'NoteVideo',
+       
         isPinned: false,
-        info: {
+        infos: [{
+            type: 'NoteVideo',
             url: 'https://www.youtube.com/watch?v=8ucz_pm3LX8',
             title: '',
             videoId: '8ucz_pm3LX8'
-        },
+        }],
         style: {
             backgroundColor: '#121212',
-            color:'#ffffff'
+            color: '#ffffff'
         }
     },
     {
         id: utilService.makeId(),
-        type: 'NoteTodo',
+        label: 'Todos',
         isPinned: false,
-        info: {
-            label: 'Todos',
+        infos: [{
+            type: 'NoteTodo',
             todos: [{
-                txt:'sleep',
-                id:utilService.makeId(),
-                doneAt:null
+                txt: 'sleep',
+                id: utilService.makeId(),
+                doneAt: null
             },
             {
-                txt:'Finish This Sprint',
-                id:utilService.makeId(),
-                doneAt:null
+                txt: 'Finish This Sprint',
+                id: utilService.makeId(),
+                doneAt: null
             },
             {
-                txt:`Don't Forget to eat (again)`,
-                id:utilService.makeId(),
-                doneAt:null
+                txt: `Don't Forget to eat (again)`,
+                id: utilService.makeId(),
+                doneAt: null
             }
             ]
-        },
+        }],
         style: {
             backgroundColor: '#ffffff',
         }
@@ -63,12 +64,13 @@ let gNotes = [
     },
     {
         id: utilService.makeId(),
-        type: 'NoteImg',
+      
         isPinned: false,
-        info: {
-            url: 'https://static01.nyt.com/images/2020/05/16/business/16JORDAN-01sub/16JORDAN-01sub-superJumbo.jpg',
+        infos: [{
+            type: 'NoteImg',
+            imgUrl: 'https://static01.nyt.com/images/2020/05/16/business/16JORDAN-01sub/16JORDAN-01sub-superJumbo.jpg',
             title: ''
-        },
+        }],
         style: {
             backgroundColor: '#ffffff',
         }
@@ -77,13 +79,13 @@ let gNotes = [
 
 function query() {
 
-//search and filter 
+    //search and filter 
     return Promise.resolve(gNotes)
 }
 
-function getNoteById(noteId){
- 
-    return Promise.resolve(gNotes.find(note=>note.id===noteId))
+function getNoteById(noteId) {
+
+    return Promise.resolve(gNotes.find(note => note.id === noteId))
 }
 
 function saveNote(note) {
@@ -101,22 +103,11 @@ function _updateNote(noteToUpdate) {
 
 function _addNote(note) {
 
-    switch (note.type) {
-        case 'NoteImg': return _createImgNote(note)
-        case 'NoteTodo': return _createTodoNote(note)
-        case 'NoteVideo': return _createVideoNote(note)
-        default: return _createTextNote(note)
-    }
-}
-function _createTextNote(note) {
-
     const addedNote = {
         id: utilService.makeId(),
-        type: 'NoteText',
+        label: '',
         isPinned: false,
-        info: {
-            txt: note.txt
-        },
+        infos: [_createNoteInfo(note)],
         style: {
             backgroundColor: '#ffffff',
             color: 'black'
@@ -124,33 +115,39 @@ function _createTextNote(note) {
     }
     gNotes.unshift(addedNote)
     return Promise.resolve()
+
+
+}
+function _createNoteInfo(note) {
+    switch (note.type) {
+        case 'NoteImg': return _createImgInfo(note)
+        case 'NoteTodo': return _createTodoInfo(note)
+        case 'NoteVideo': return _createVideoInfo(note)
+        default: return _createTextInfo(note)
+    }
+}
+function _createTextInfo(note) {
+    const addedInfo = {
+        type:'NoteText',
+        title: '',
+        txt: note.txt
+    }
+    return addedInfo;
 }
 
-function _createImgNote(note) {
-    if (!note.txt.match(/\.(jpeg|jpg|gif|png)$/)) return Promise.reject('Valid Pictures Only')
-    const addedNote = {
-        id: utilService.makeId(),
-        type: 'NoteImg',
-        isPinned: false,
-        info: {
-            url: note.txt,
-            title: ''
-        },
-        style: {
-            backgroundColor: '#ffffff',
-        }
+function _createImgInfo(note) {
+    const addedInfo = {
+        type:'NoteImg',
+        imgUrl: note.txt,
+        title: ''
     }
-    gNotes.unshift(addedNote)
-    return Promise.resolve()
+    return addedInfo;
 }
-function _createTodoNote(note) {
+function _createTodoInfo(note) {
     const todos = note.txt.split(',');
-    const addedNote = {
-        id: utilService.makeId(),
-        type: 'NoteTodo',
-        isPinned: false,
-        info: {
-            label: 'Todos',
+    const addedInfo = {
+        title:'',
+            type:'NoteTodo',
             todos: todos.map(todo => {
                 return {
                     id: utilService.makeId(),
@@ -158,35 +155,21 @@ function _createTodoNote(note) {
                     doneAt: null
                 }
             })
-        },
-        style: {
-            backgroundColor: '#ffffff',
         }
-
-    }
-    gNotes.unshift(addedNote)
-    return Promise.resolve()
+    return addedInfo;
 }
-function _createVideoNote(note) {
+function _createVideoInfo(note) {
     if (!note.txt.startsWith('https://www.youtube.com/')) return Promise.reject('Wrong Url for Video')
     const idIdx = note.txt.search('v=')
     if (idIdx === -1) return Promise.reject('could not find the video')
-
-    const addedNote = {
-        id: utilService.makeId(),
-        type: 'NoteVideo',
-        isPinned: false,
-        info: {
+    const addedInfo = {
+        title:'',
+            type: 'NoteVideo',
             url: note.txt,
-            title: '',
             videoId: note.txt.substring(idIdx + 2)
-        },
-        style: {
-            backgroundColor: '#ffffff',
-        }
     }
-    gNotes.unshift(addedNote)
-    return Promise.resolve()
+   
+    return addedInfo;
 }
 
 function removeNoteById(noteId) {
