@@ -1,7 +1,8 @@
-const { Link } = ReactRouterDOM;
+const { Link ,Route} = ReactRouterDOM;
 import {NotesList} from '../cmps/NotesList.jsx'
 import {noteService} from '../services/note-service.js'
 import {NoteAdd} from '../cmps/NoteAdd.jsx'
+import {EditNote} from '../cmps/EditNote.jsx'
 export class KeepApp extends React.Component {
 
   state={
@@ -27,9 +28,10 @@ loadNotes=()=>{
     const{notes}=this.state
     if(!notes) return <div>Loading...</div>
     return (
-      <section className="main-container">
+      <section className="keep-app">
         <h1>this is the keepApp </h1>
         <NoteAdd onSaveNote={this.onSaveNote}/>
+        <Route component={EditNote} path="/keep/edit/:noteId"/>
       <NotesList notes={notes} onSaveNote={this.onSaveNote} onRemoveNote={this.onRemoveNote}/>
       </section>
     );

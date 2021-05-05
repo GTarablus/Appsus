@@ -1,17 +1,18 @@
-import { NoteText } from './NoteText.jsx'
-import {NoteImg} from './NoteImg.jsx'
-import {NoteVideo} from './NoteVideo.jsx'
-import {NoteTodo} from './NoteTodo.jsx'
-export class NotePreview extends React.Component {
+const { withRouter,Link,Route } = ReactRouterDOM;
+import {DynamicNote} from './DynamicNote.jsx'
+import { IconPalette } from './icon-cmps/IconPalette.jsx'
+class _NotePreview extends React.Component {
 
     //the dynamic component
     state = {
         isEdit: false,
         txtEdit: '',
         note: this.props.note,
-       
-    }
 
+    }
+    componentDidMount() {
+        console.log(this.props.history)
+    }
     handleChange = ({ target }) => {
         const field = target.name
         const value = target.value
@@ -31,64 +32,30 @@ export class NotePreview extends React.Component {
                     backgroundColor: value
                 }
             },
-            backgroundColor:value
+            backgroundColor: value
         }), () => this.props.onSaveNote(this.state.note))
     }
-    onCancelEdit = () => {
-        this.setState({ isEdit: false, txtEdit: '' })
-    }
-    onSubmitEdit = () => {
-        this.setState(prevState => ({
-            note: {
-                ...prevState.note,
-                info: {
-                    txt: this.state.txtEdit
-                }
-            },
-            isEdit: false,
-            txtEdit: ''
-        }), () => this.props.onSaveNote(this.state.note))
-    }
-
     render() {
-        const {backgroundColor}= this.props.note.style
+        const { backgroundColor } = this.props.note.style
         const { note, onRemoveNote } = this.props
         const { isEdit, txtEdit } = this.state
-        return <div className="note-preview" style={{backgroundColor:backgroundColor}}>
-            <DynamicCmp note={note}{...this.props}/>
+        return <Link to={`/keep/edit/${note.id}`}><div className="note-preview" style={{ backgroundColor: backgroundColor }}>
+            <DynamicNote note={note}{...this.props} />
             {/* {(isEdit) ?
                 <textarea name="txtEdit" id="" cols="" rows="" value={txtEdit} onChange={this.handleChange}></textarea>
-                : note.info.txt} */}
-            {(!isEdit) ?
-                <div className="note-preview-buttons">
+            : note.info.txt} */}
+                <div className="note-preview-buttons" onClick={(ev)=>ev.stopPropagation()}>
                     <button onClick={() => onRemoveNote(note.id)}>Delete</button>
                     <button onClick={() => this.setState({ isEdit: true, txtEdit: note.info.txt })}>Edit</button>
-                    <label htmlFor="bg-note-color">Change Color
-            <input type="color" id="bg-note-color" name="backgroundColor" onChange={this.handleChange} value={backgroundColor}/>
+                    <label htmlFor={`bg-note-color-${note.id}`} >
+                        <IconPalette />
+                        <input type="color" id={`bg-note-color-${note.id}`} name="backgroundColor" onChange={this.handleChange} value={backgroundColor} />
                     </label>
                 </div>
-                :
-                <div className="edit-btn-container">
-                    <button onClick={this.onSubmitEdit}>V</button>
-                    <button onClick={this.onCancelEdit}>X</button>
-                </div>
-            }
         </div>
+        </Link>
     }
-    
-} 
+}
 
-const DynamicCmp = (props) => {
-    switch (props.note.type) {
-      case 'NoteText':
-        return <NoteText {...props} />
-      case 'NoteImg':
-        return <NoteImg {...props} />
-        case 'NoteVideo':
-            return<NoteVideo {...props}/>
-      case 'NoteTodo':
-        return <NoteTodo {...props} />
-    //   default:
-    //     return //...some default error view
-    }
-  }
+
+export const NotePreview = withRouter(_NotePreview)

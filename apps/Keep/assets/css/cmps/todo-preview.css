@@ -7,7 +7,9 @@
     font-size: 0.8rem;
     cursor: pointer;
 }
-
+.todo-preview input[type="checkbox"]{
+    cursor: pointer;
+}
 .todo-preview:hover button{
     opacity: 1;
 }

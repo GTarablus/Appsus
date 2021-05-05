@@ -1,0 +1,60 @@
+.edit-note {
+    width: 40%;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: blanchedalmond;
+    border: 1px solid black;
+    z-index: 10;
+    min-height: 30vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-note input[type="text"]{
+    padding: 1rem 1.25rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.edit-note .edit-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content:center
+    
+}
+.edit-note img {
+    max-width: 80%
+}
+
+.edit-note .edit-btns {
+    display: flex;
+    justify-content: center;
+}
+
+.edit-note .edit-btns svg {
+    width:1.25rem;
+    margin-inline-end: 1.5rem;
+    cursor: pointer;
+}
+
+.edit-note svg:hover path {
+    fill: black;
+    opacity: 1;
+}
+
+.edit-note svg path {
+     fill: #202124;
+     opacity: .71;
+    transition: .2s;
+}
+
+.edit-note .action-btns {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.25rem
+}

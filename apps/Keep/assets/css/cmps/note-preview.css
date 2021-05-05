@@ -1,8 +1,7 @@
 .note-preview{
     border: 1px solid rgb(212, 212, 212); 
-    padding:40px 10px;
-    margin-inline-end: 3%;
-    text-align: center;
+    
+    margin-inline-end: 0.5rem;
     page-break-inside: avoid;
     break-inside: avoid;
     margin-bottom:0.5rem ;
@@ -20,8 +19,29 @@ input[type="color"]{
 .note-preview iframe{
     max-width: 100%;
     object-fit: contain;
+    display: block;
 }
 .note-preview iframe{
     border: none;
     border-radius: 4px;
+}
+.note-preview svg{
+    height:1.2rem;
+    cursor: pointer;
+}
+.note-preview path{
+    fill: #202124;
+    opacity: .71;
+}
+.note-preview .note-todo,.note-text,.note-img,.note-video{
+    padding: 0.75rem 1rem;
+}
+.note-preview-buttons{
+    opacity: 0;
+  
+    transition: .3s;
+}
+
+.note-preview:hover .note-preview-buttons{
+    opacity: 1;
 }
