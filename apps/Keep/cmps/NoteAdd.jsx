@@ -1,3 +1,7 @@
+import {IconVideo} from './icon-cmps/IconVideo.jsx'
+import {IconImage} from './icon-cmps/IconImage.jsx'
+import {IconTodo} from './icon-cmps/IconTodo.jsx'
+import {IconText} from './icon-cmps/IconText.jsx'
 export class NoteAdd extends React.Component{
     state={
         type:'NoteText',
@@ -22,14 +26,22 @@ export class NoteAdd extends React.Component{
         const{type,txt}=this.state
        return <div className="note-add-container">
            <input className="note-add-input" type="text" name="txt" placeholder={this.getPlaceholder()} value={txt} onChange={this.handleChange}/>
-           <label htmlFor="text-type"> Text</label>
+           <label htmlFor="text-type"> 
            <input type="radio" name="type" value='NoteText' id="text-type" onChange={this.handleChange}/>
-           <label htmlFor="img-type"> Image</label>
+          <IconText/>
+           </label>
+           <label htmlFor="img-type"> 
            <input type="radio" name="type" value='NoteImg' id="img-type" onChange={this.handleChange}/>
-           <label htmlFor="todo-type"> Todo</label>
+           <IconImage/>
+            </label>
+           <label htmlFor="todo-type"> 
            <input type="radio" name="type" value='NoteTodo' id="todo-type" onChange={this.handleChange}/>
-           <label htmlFor="video-type"> Video</label>
+           <IconTodo/>
+           </label>
+           <label htmlFor="video-type">
            <input type="radio" name="type" value='NoteVideo' id="video-type" onChange={this.handleChange}/>
+           <IconVideo/>
+           </label>
            <button onClick={()=>{
                this.props.onSaveNote({type,txt})
                this.setState({txt:''})

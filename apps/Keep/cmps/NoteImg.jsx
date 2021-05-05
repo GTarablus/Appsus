@@ -1,5 +1,5 @@
 export function NoteImg({note}){
 
-return <img src={note.info.url} alt=""/>
+return <img className="note-img" src={note.info.url} alt=""/>
 
 }

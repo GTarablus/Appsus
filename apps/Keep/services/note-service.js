@@ -2,7 +2,8 @@ import { utilService } from '../../../services/util-service.js'
 export const noteService = {
     query,
     saveNote,
-    removeNoteById
+    removeNoteById,
+    getNoteById
 }
 
 let gNotes = [
@@ -76,8 +77,13 @@ let gNotes = [
 
 function query() {
 
-
+//search and filter 
     return Promise.resolve(gNotes)
+}
+
+function getNoteById(noteId){
+ 
+    return Promise.resolve(gNotes.find(note=>note.id===noteId))
 }
 
 function saveNote(note) {
