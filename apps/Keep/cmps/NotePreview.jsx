@@ -5,8 +5,6 @@ class _NotePreview extends React.Component {
 
     //the dynamic component
     state = {
-        isEdit: false,
-        txtEdit: '',
         note: this.props.note,
 
     }
@@ -38,19 +36,12 @@ class _NotePreview extends React.Component {
     render() {
         const { backgroundColor } = this.props.note.style
         const { note, onRemoveNote } = this.props
-        const { isEdit, txtEdit } = this.state
-        return <Link to={`/keep/edit/${note.id}`}><div className="note-preview" style={{ backgroundColor: backgroundColor }}>
-            <DynamicNote note={note}{...this.props} />
-            {/* {(isEdit) ?
-                <textarea name="txtEdit" id="" cols="" rows="" value={txtEdit} onChange={this.handleChange}></textarea>
-            : note.info.txt} */}
+        return <Link to={`/keep/edit/${note.id}`}><div className="note-preview" style={note.style}>
+            {note.infos.map(info=><DynamicNote  info={info} note={note}{...this.props} />)}
                 <div className="note-preview-buttons" onClick={(ev)=>ev.stopPropagation()}>
                     <button onClick={() => onRemoveNote(note.id)}>Delete</button>
                     <button onClick={() => this.setState({ isEdit: true, txtEdit: note.info.txt })}>Edit</button>
-                    <label htmlFor={`bg-note-color-${note.id}`} >
-                        <IconPalette />
-                        <input type="color" id={`bg-note-color-${note.id}`} name="backgroundColor" onChange={this.handleChange} value={backgroundColor} />
-                    </label>
+                   <IconPalette note={note} handleChange={this.handleChange}/>
                 </div>
         </div>
         </Link>

@@ -4,7 +4,7 @@ export function TodoPreview({todo,onRemoveTodo,onToggleTodo}){
         <input type="checkbox" onChange={(ev)=>{
             ev.stopPropagation()
             onToggleTodo(todo.id)
-        }}/>
+        }} checked={todo.doneAt? true:false}/>
         <span className={(todo.doneAt)? 'todo-marked':'' }>{todo.txt}</span>
         <button onClick={(ev)=>{
             ev.stopPropagation()

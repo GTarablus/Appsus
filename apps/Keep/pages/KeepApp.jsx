@@ -3,14 +3,21 @@ import {NotesList} from '../cmps/NotesList.jsx'
 import {noteService} from '../services/note-service.js'
 import {NoteAdd} from '../cmps/NoteAdd.jsx'
 import {EditNote} from '../cmps/EditNote.jsx'
+import {eventBusService} from '../../../services/event-bus-service.js'
 export class KeepApp extends React.Component {
 
+  removeEvent;
   state={
     notes:null
   }
 
   componentDidMount(){
     this.loadNotes()
+    this.removeEvent = eventBusService.on('save-note', (note) =>this.onSaveNote(note))
+  }
+
+  componentWillUnmount(){
+    this.removeEvent();
   }
 loadNotes=()=>{
     noteService.query().then(notes=>this.setState({notes}))

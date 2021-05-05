@@ -1,0 +1,8 @@
+.icon-palette{
+    position: relative;
+}
+.icon-palette input{
+    position:absolute;
+    opacity: 0;
+    width: 0.1px;
+}
