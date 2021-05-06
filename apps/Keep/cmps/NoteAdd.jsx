@@ -7,15 +7,16 @@ export class NoteAdd extends React.Component {
         type: 'NoteText',
         txt: '',
         isFocus: false,
-        title: ''
+        title:'',
+        isInputFocus: false
 
     }
     getPlaceholder = () => {
         switch (this.state.type) {
-            case 'NoteText': return 'Enter your Text'
-            case 'NoteImg': return 'Enter an image Url'
-            case 'NoteTodo': return 'Enter a comma Separted list for your todos'
-            case 'NoteVideo': return 'Enter a video url'
+            case 'NoteText': return 'Take A Note...'
+            case 'NoteImg': return 'Enter An Image Url'
+            case 'NoteTodo': return 'Enter A Comma-Separted List '
+            case 'NoteVideo': return 'Enter A Youtube Url'
 
         }
     }
@@ -24,36 +25,47 @@ export class NoteAdd extends React.Component {
         const val = target.value;
         this.setState({ [field]: val }, () => console.log(this.state))
     }
-    toggleFocus = () => {
-        this.setState(prevState => ({ ...prevState, isFocus: !prevState.isFocus }))
+    onCloseInput = (ev) => {
+        ev.stopPropagation()
+        this.setState({ isInputFocus: false })
     }
     render() {
-        const { type, txt, isFocus,title } = this.state
-        return <div className={`note-add-container ${isFocus && 'expanded-input'}`} >
-            <input className="note-add-input" type="text" name="title" onChange={this.handleChange} placeholder="Enter your title..." />
-            <input className="note-add-input" type="text" name="txt" placeholder={this.getPlaceholder()} value={txt} onChange={this.handleChange}
-                // onFocus={this.toggleFocus} onBlur={this.toggleFocus} 
-            />
-            <label htmlFor="text-type">
-                <input type="radio" name="type" value='NoteText' id="text-type" onChange={this.handleChange} />
-                <IconText />
-            </label>
-            <label htmlFor="img-type">
-                <input type="radio" name="type" value='NoteImg' id="img-type" onChange={this.handleChange} />
-                <IconImage />
-            </label>
-            <label htmlFor="todo-type">
-                <input type="radio" name="type" value='NoteTodo' id="todo-type" onChange={this.handleChange} />
-                <IconTodo />
-            </label>
-            <label htmlFor="video-type">
-                <input type="radio" name="type" value='NoteVideo' id="video-type" onChange={this.handleChange} />
-                <IconVideo />
-            </label>
-            <button onClick={() => {
-                this.props.onSaveNote({ type, txt ,title})
-                this.setState({ txt: '',title:'' })
-            }}>Add</button>
+        const { type, txt, isInputFocus, title } = this.state
+
+        return <div className={`note-add-container ${isInputFocus && 'expanded-input'}`} name="note-add" onClick={() => {
+            this.setState({ isInputFocus: true })
+        }} >
+            {isInputFocus && <input className="note-add-input-title" type="text" name="title" onChange={this.handleChange} value={title} placeholder="Title" />}
+            <input className="note-add-input" type="text" name="txt" placeholder={this.getPlaceholder()} value={txt} onChange={this.handleChange} />
+            <div className="input-add-labels">
+
+                <label htmlFor="text-type">
+                    <input type="radio" name="type" value='NoteText' id="text-type" onChange={this.handleChange} />
+                    <IconText />
+                </label>
+                <label htmlFor="img-type">
+                    <input type="radio" name="type" value='NoteImg' id="img-type" onChange={this.handleChange} />
+                    <IconImage />
+                </label>
+                <label htmlFor="todo-type">
+                    <input type="radio" name="type" value='NoteTodo' id="todo-type" onChange={this.handleChange} />
+                    <IconTodo />
+                </label>
+                <label htmlFor="video-type">
+                    <input type="radio" name="type" value='NoteVideo' id="video-type" onChange={this.handleChange} />
+                    <IconVideo />
+                </label>
+                <label htmlFor="map-type">Map
+                    <input type="radio" name="type" value='NoteMap' id="map-type" onChange={this.handleChange} />
+                </label>
+            </div>
+            {isInputFocus &&  <div className="input-add-btns">
+               <button onClick={this.onCloseInput}>Close</button>
+                <button onClick={() => {
+                    this.props.onSaveNote({ type, txt, title })
+                    this.setState({ txt: '', title: '' })
+                }}>Add</button>
+            </div>}
         </div>
     }
 }
