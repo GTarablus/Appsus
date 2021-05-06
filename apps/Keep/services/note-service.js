@@ -4,13 +4,14 @@ export const noteService = {
     saveNote,
     removeNoteById,
     getNoteById,
-    updateNoteStyleById
+    updateNoteStyleById,
+    createNoteInfo
 }
 
 let gNotes = [
     {
         id: utilService.makeId(),
-        isPinned: true,
+        isPinned: false,
         title:'',
         type: 'NoteText',
         info: {
@@ -93,11 +94,12 @@ function getNoteById(noteId) {
 }
 
 function saveNote(note) {
-    console.log(note)
+
     return note.id ? _updateNote(note) : _addNote(note)
 }
 
 function _updateNote(noteToUpdate) {
+    console.log('note of the todo note',noteToUpdate)
     const noteIdx = gNotes.findIndex(note => note.id === noteToUpdate.id)
     gNotes.splice(noteIdx, 1, noteToUpdate)
     return Promise.resolve()
@@ -108,11 +110,11 @@ function _updateNote(noteToUpdate) {
 function _addNote(note) {
     const addedNote = {
         id: utilService.makeId(),
-        title:'',
+        title:note.title,
         label: '',
         type: note.type,
         isPinned: false,
-        info: _createNoteInfo(note),
+        info: createNoteInfo(note),
         style: {
             backgroundColor: '#ffffff',
             color: 'black'
@@ -131,7 +133,7 @@ function updateNoteStyleById(noteId,style){
    note.style=style;
     return Promise.resolve()
 }
-function _createNoteInfo(note) {
+function createNoteInfo(note) {
     switch (note.type) {
         case 'NoteImg': return _createImgInfo(note)
         case 'NoteTodo': return _createTodoInfo(note)
@@ -153,6 +155,7 @@ function _createImgInfo(note) {
     return addedInfo;
 }
 function _createTodoInfo(note) {
+    if(!note.txt) note.txt='';
     const todos = note.txt.split(',');
     const addedInfo = {
             todos: todos.map(todo => {

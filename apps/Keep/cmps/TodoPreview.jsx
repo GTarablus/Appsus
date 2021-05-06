@@ -1,5 +1,5 @@
 export function TodoPreview({todo,onRemoveTodo,onToggleTodo}){
-
+    if(!todo.txt)return <span></span>
     return <div className="todo-preview" onClick={(ev)=>ev.stopPropagation()}>
         <input type="checkbox" onChange={(ev)=>{
             ev.stopPropagation()

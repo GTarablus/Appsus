@@ -1,3 +1,4 @@
 .notes-container{
-columns:3
+columns:3;
+min-height: 30vh;
 }
