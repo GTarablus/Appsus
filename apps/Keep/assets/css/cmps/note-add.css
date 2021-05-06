@@ -11,6 +11,10 @@
    margin-bottom: 2rem;
 }
 
+.note-add-container.expanded-input{
+    flex-direction: column;
+    
+}
 
 .note-add-input{
     flex-grow: 1;

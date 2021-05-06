@@ -10,11 +10,7 @@ export class NoteTodo extends React.Component{
         inputTodoTxt:''
     }
     componentDidMount(){
-        console.log(this.props)
-        noteService.getNoteById(this.props.note.id)
-        .then(note=>{
-            this.setState({note,todos:this.props.info.todos})
-        })
+            this.setState({note:this.props.note,todos:this.props.note.info.todos})
     }
     onToggleTodo=(todoId)=>{
         const updatedTodos=this.state.todos;
@@ -29,15 +25,16 @@ export class NoteTodo extends React.Component{
         this.updateAndSaveTodos(updatedTodos)
     }
     updateAndSaveTodos(updatedTodos){
+        
         this.setState(prevState=>({
             note:{
                 ...prevState.note,
-                infos:{
+                info:{
                     ...prevState.note.info,
                     todos:updatedTodos
                 }
             }
-            }), eventBusService.emit('save-note',this.state.note))
+            }),()=> eventBusService.emit('save-todos',this.state.note))
     }
     onAddTodo=()=>{
         const updatedTodos=this.state.todos;
@@ -59,7 +56,7 @@ export class NoteTodo extends React.Component{
         
         if(!note) return <div>loading</div>
         return <div className="note-todo">
-            <TodoList todos={todos} onToggleTodo={this.onToggleTodo} onAddTodo={this.onAddTodo} onRemoveTodo={this.onRemoveTodo} />
+          <TodoList todos={todos} onToggleTodo={this.onToggleTodo} onAddTodo={this.onAddTodo} onRemoveTodo={this.onRemoveTodo} />
             <input type="text" value={inputTodoTxt} onChange={this.handleChange} placeholder="add an item to your list..."/>
             <button onClick={this.onAddTodo}>Add</button>
         </div>

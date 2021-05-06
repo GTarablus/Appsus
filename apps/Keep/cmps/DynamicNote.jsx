@@ -5,7 +5,7 @@ import { NoteTodo } from './NoteTodo.jsx'
 export const DynamicNote = (props) => {
     
 
-    switch (props.note.type) {
+    switch (props.type) {
         case 'NoteText':
             return <NoteText info={props.note.info} />
         case 'NoteImg':
