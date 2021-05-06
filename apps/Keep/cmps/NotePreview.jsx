@@ -26,8 +26,10 @@ class _NotePreview extends React.Component {
     render() {
         const { note, onRemoveNote } = this.props
         return <div className="note-preview" style={note.style} >
+            <div className="note-preview-header">
                 <button className="pin-btn" onClick={() => this.props.onTogglePinNote(this.props.note)}><IconPin /></button>
                {note.title&&<h3>{note.title}</h3>}
+            </div>
             <DynamicNote note={note}{...this.props} type={note.type} />
             <div className="note-preview-buttons" onClick={(ev) => ev.stopPropagation()}>
                 <IconPalette style={this.state.style} note={this.props.note} updateColor={this.updateColor} />

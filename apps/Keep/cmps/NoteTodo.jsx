@@ -46,10 +46,14 @@ export class NoteTodo extends React.Component{
         }))
         }
     handleChange=({target})=>{
+ 
         this.setState(prevState=>({
             ...prevState,
             inputTodoTxt:target.value
         }))
+    }
+    checkEnter=(ev)=>{
+        if(ev.keyCode===13)this.onAddTodo()
     }
     render (){
         const {note,todos,inputTodoTxt}=this.state
@@ -57,8 +61,7 @@ export class NoteTodo extends React.Component{
         if(!note) return <div>loading</div>
         return <div className="note-todo">
           <TodoList todos={todos} onToggleTodo={this.onToggleTodo} onAddTodo={this.onAddTodo} onRemoveTodo={this.onRemoveTodo} />
-            <input type="text" value={inputTodoTxt} onChange={this.handleChange} placeholder="add an item to your list..."/>
-            <button onClick={this.onAddTodo}>Add</button>
+            <input type="text" value={inputTodoTxt} onChange={this.handleChange} onKeyDown={this.checkEnter} placeholder="add an item to your list..."/>
         </div>
     }
 

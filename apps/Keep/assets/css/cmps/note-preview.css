@@ -1,4 +1,5 @@
 .note-preview{
+    
     border: 1px solid rgb(212, 212, 212); 
     margin-inline-end: 0.5rem;
     page-break-inside: avoid;
@@ -12,6 +13,16 @@
 .note-pinned-section .notes-container .note-preview{
     page-break-inside: avoid;
     break-inside: avoid;
+}
+.note-preview-header{
+    display: flex;
+}
+.note-preview h3{
+    margin: 0;
+    padding: 0.5rem 0;
+    
+    text-align: center;
+    flex-grow:1;
 }
 .note-preview:hover{
    box-shadow:  0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
@@ -53,6 +64,7 @@ input[type="color"]{
     position:relative;
     left: 95%;
     transform: rotate(46deg);
+    z-index: 5;
 }
 .note-preview button{
     padding: 0;
@@ -62,4 +74,7 @@ input[type="color"]{
 
 .note-preview:hover .note-preview-buttons,.note-preview:hover .pin-btn{
     opacity: 1;
+}
+.note-preview .note-map+.note-preview-buttons{
+    z-index: 999;
 }

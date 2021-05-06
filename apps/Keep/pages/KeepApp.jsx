@@ -5,11 +5,15 @@ import {NoteAdd} from '../cmps/NoteAdd.jsx'
 import {EditNote} from '../cmps/EditNote.jsx'
 import {eventBusService} from '../../../services/event-bus-service.js'
 import {IconPin} from '../cmps/icon-cmps/IconPin.jsx'
+import { NoteFilter } from '../cmps/NoteFilter.jsx';
 export class KeepApp extends React.Component {
 
   removeEvent;
   state={
-    notes:null
+    notes:null,
+    filterBy:{
+      txt:''
+    }
   }
 
   componentDidMount(){
@@ -22,7 +26,7 @@ export class KeepApp extends React.Component {
     this.removeEvent();
   }
 loadNotes=()=>{
-    noteService.query().then(notes=>this.setState({notes}))
+    noteService.query(this.state.filterBy).then(notes=>this.setState({notes}))
   }
 
   onRemoveNote=(id)=>{
@@ -39,15 +43,19 @@ onTogglePinNote=(note)=>{
   }
   //on update color 
 
-
+onFilter=(filterBy)=>{
+  console.log('set filter')
+  this.setState({ filterBy : {...this.state.filterBy, ...filterBy}},this.loadNotes)
+}
 
   render() {
     const{notes}=this.state
     if(!notes) return <div>Loading...</div>
     return (
-      <section className="keep-app">
+      <section className="keep-app" >
         <h1>this is the keepApp </h1>
         <NoteAdd onSaveNote={this.onSaveNote}/>
+        <NoteFilter onFilter={this.onFilter}/>
         {notes.some(note=>note.isPinned)&& <div className="pinned-notes-section">
           <h3>PINNED <IconPin/> </h3>
       <NotesList notes={notes.filter(note=>note.isPinned)} onSaveNote={this.onSaveNote} onRemoveNote={this.onRemoveNote} onTogglePinNote={this.onTogglePinNote}/>

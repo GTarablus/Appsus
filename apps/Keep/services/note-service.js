@@ -82,10 +82,14 @@ let gNotes = [
     }
 ]
 
-function query() {
-
-    //search and filter 
-    return Promise.resolve(gNotes)
+function query(filterBy) {
+    console.log('in query' , filterBy)
+    if(!filterBy) return Promise.resolve(gNotes)
+   const {txt} =filterBy
+   const filteredNotes=gNotes.filter(note=>{
+        return _isNoteInFilter(note,txt)
+    })
+   return Promise.resolve(filteredNotes)
 }
 
 function getNoteById(noteId) {
@@ -138,6 +142,7 @@ function createNoteInfo(note) {
         case 'NoteImg': return _createImgInfo(note)
         case 'NoteTodo': return _createTodoInfo(note)
         case 'NoteVideo': return _createVideoInfo(note)
+        case 'NoteMap' : return _createMapInfo(note)
         default: return _createTextInfo(note)
     }
 }
@@ -177,6 +182,19 @@ function _createVideoInfo(note) {
             videoId: note.txt.substring(idIdx + 2)
     }
     return addedInfo;
+}
+function _createMapInfo(note){
+    const addedInfo = {
+        locName: note.txt,
+    }
+    return addedInfo;
+}
+function _isNoteInFilter(note,txt){
+   txt= txt.toUpperCase()
+    if(note.title.toUpperCase().includes(txt))return true
+    if(note.type==='NoteText'&&  note.info.txt.toUpperCase().includes(txt)) return true
+    if(note.type==='NoteTodo' && note.info.todos.some(todo=>todo.txt.toUpperCase().includes(txt))) return true
+    return false
 }
 
 function removeNoteById(noteId) {
