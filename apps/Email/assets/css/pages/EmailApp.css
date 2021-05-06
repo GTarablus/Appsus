@@ -1,8 +1,14 @@
-.emails-main-display {
+.email-greet {
+  text-align: center;
+}
+.emails-main-container {
   display: flex;
+  flex-direction: column;
   min-height: 750px;
   max-height: 100%;
 }
-.email-greet {
-  text-align: center;
+
+.email-display {
+  display: flex;
+  flex-direction: row;
 }

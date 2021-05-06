@@ -3,11 +3,13 @@ import { EmailMenu } from '../cmps/EmailMenu.jsx';
 import { EmailList } from '../cmps/EmailList.jsx';
 import { EmailDetails } from '../cmps/EmailDetails.jsx';
 import { emailService } from '../services/email-service.js';
+import { EmailFilter } from '../cmps/EmailFilter.jsx';
 
 export class EmailApp extends React.Component {
   state = {
     emails: null,
     view: 'inbox',
+    filterBy: null,
   };
 
   componentDidMount() {
@@ -16,7 +18,7 @@ export class EmailApp extends React.Component {
   }
 
   loadEmails = () => {
-    emailService.query().then((emails) => {
+    emailService.query(this.state.filterBy).then((emails) => {
       this.setState({ emails: emails });
     });
   };
@@ -38,6 +40,10 @@ export class EmailApp extends React.Component {
   };
   onSetView = (view) => {
     this.setState({ view });
+  };
+
+  onSetFilter = (filterBy) => {
+    this.setState({ filterBy }, this.loadEmails);
   };
 
   setEmailsForDisplay = () => {
@@ -66,25 +72,28 @@ export class EmailApp extends React.Component {
           <h1>Appsus</h1>
           <h2>Welcome to Email!</h2>
         </div>
-        <div className="emails-main-display">
-          <EmailMenu onSetView={this.onSetView} />
-          <Switch>
-            <Route path="/email/:id" component={EmailDetails} />
-            <Route
-              path="/email"
-              render={(props) => (
-                <EmailList
-                  {...props}
-                  view={this.state.view}
-                  emails={this.setEmailsForDisplay()}
-                  toggleRead={this.toggleRead}
-                  onDeleteEmail={this.onDeleteEmail}
-                  onRestoreEmail={this.onRestoreEmail}
-                  onStarEmail={this.onStarEmail}
-                />
-              )}
-            />
-          </Switch>
+        <div className="emails-main-container">
+          <EmailFilter onSetFilter={this.onSetFilter} />
+          <div className="email-display">
+            <EmailMenu onSetView={this.onSetView} />
+            <Switch>
+              <Route path="/email/:id" component={EmailDetails} />
+              <Route
+                path="/email"
+                render={(props) => (
+                  <EmailList
+                    {...props}
+                    view={this.state.view}
+                    emails={this.setEmailsForDisplay()}
+                    toggleRead={this.toggleRead}
+                    onDeleteEmail={this.onDeleteEmail}
+                    onRestoreEmail={this.onRestoreEmail}
+                    onStarEmail={this.onStarEmail}
+                  />
+                )}
+              />
+            </Switch>
+          </div>
         </div>
       </section>
     );

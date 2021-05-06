@@ -27,7 +27,9 @@ function getEmails() {
         body:
           'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
         isRead: false,
-        sentAt: 1549312452,
+        sentAt: 1525074698,
+        sentTime: utilService.getTimeFromStamp(1525074698),
+        sentDate: utilService.getDateFromStamp(1525074698),
       },
       {
         id: utilService.makeId(),
@@ -37,7 +39,9 @@ function getEmails() {
         body:
           'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
         isRead: false,
-        sentAt: 1599312452,
+        sentAt: 1549312452,
+        sentTime: utilService.getTimeFromStamp(1549312452),
+        sentDate: utilService.getDateFromStamp(1549312452),
       },
       {
         id: utilService.makeId(),
@@ -47,7 +51,9 @@ function getEmails() {
         body:
           'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
         isRead: false,
-        sentAt: 1649312452,
+        sentAt: 1569312452,
+        sentTime: utilService.getTimeFromStamp(1569312452),
+        sentDate: utilService.getDateFromStamp(1569312452),
       },
       {
         id: utilService.makeId(),
@@ -57,7 +63,9 @@ function getEmails() {
         body:
           'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
         isRead: false,
-        sentAt: 1879312452,
+        sentAt: 1599645452,
+        sentTime: utilService.getTimeFromStamp(1599645452),
+        sentDate: utilService.getDateFromStamp(1599645452),
       },
       {
         id: utilService.makeId(),
@@ -67,7 +75,9 @@ function getEmails() {
         body:
           'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
         isRead: false,
-        sentAt: 1909312452,
+        sentAt: 3136253789,
+        sentTime: utilService.getTimeFromStamp(3136253789),
+        sentDate: utilService.getDateFromStamp(3136253789),
       },
     ];
     storageService.saveToStorage(KEY, emails);
@@ -79,7 +89,18 @@ function _getIdxById(id) {
   return gEmails.findIndex((email) => email.id === id);
 }
 
-function query() {
+function query(filterBy) {
+  if (filterBy) {
+    var { sender, date, threads } = filterBy;
+    const filteredEmails = gEmails.filter((email) => {
+      return (
+        email.sender.toLowerCase().includes(sender.toLowerCase()) &&
+        email.sentDate.includes(date)
+      );
+    });
+    return Promise.resolve(filteredEmails);
+  }
+
   return Promise.resolve(gEmails);
 }
 
@@ -114,7 +135,8 @@ function setReadState(id) {
 
 function starEmail(id) {
   const idx = _getIdxById(id);
-  gEmails[idx].isStarred = true;
+  if (gEmails[idx].isStarred) gEmails[idx].isStarred = false;
+  else gEmails[idx].isStarred = true;
   storageService.saveToStorage(KEY, gEmails);
   return Promise.resolve();
 }

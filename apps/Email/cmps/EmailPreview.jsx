@@ -11,7 +11,7 @@ export function EmailPreview({
   return (
     <div
       className={`email-preview ${email.isRead ? 'read' : 'unread'}`}
-      onClick={() => toggleRead(email.id)}
+      onClick={() => (email.isRead ? null : toggleRead(email.id))}
     >
       <Link to={`/email/${email.id}`}>
         <div>
@@ -54,6 +54,7 @@ export function EmailPreview({
           </button>
         ) : null}
         <button
+          className={email.isStarred ? 'starred' : ''}
           onClick={(ev) => {
             ev.stopPropagation();
             onStarEmail(email.id);

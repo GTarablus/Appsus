@@ -3,6 +3,7 @@ export const utilService = {
   makeLorem,
   getRandomIntInclusive,
   getTimeFromStamp,
+  getDateFromStamp,
 };
 
 function makeId(length = 6) {
@@ -66,10 +67,10 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
 }
 
-function getTimeFromStamp(timestamp) {
-  // Create a new JavaScript Date object based on the timestamp
+function getTimeFromStamp(timeStamp) {
+  // Create a new JavaScript Date object based on the timeStamp
   // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-  var date = new Date(timestamp * 1000);
+  var date = new Date(timeStamp * 1000);
   // Hours part from the timestamp
   var hours = date.getHours();
   // Minutes part from the timestamp
@@ -77,4 +78,14 @@ function getTimeFromStamp(timestamp) {
   // Seconds part from the timestamp
   var formattedTime = hours + ':' + minutes.substr(-2);
   return formattedTime;
+}
+
+function getDateFromStamp(timeStamp) {
+  var date = new Date(timeStamp * 1000);
+  var year = date.getFullYear();
+  var month = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth();
+  var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+  var formattedDate = `${year}-${month}-${day}`;
+  console.log(formattedDate);
+  return formattedDate;
 }

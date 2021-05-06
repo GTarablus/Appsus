@@ -32,6 +32,10 @@
   background-color: white;
 }
 
+.starred {
+  background-color: yellow;
+}
+
 .sender {
   display: inline;
 }

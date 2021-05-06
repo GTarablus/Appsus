@@ -2,6 +2,7 @@
 @import './cmps/email-list.css';
 @import './cmps/email-preview.css';
 @import './cmps/email-details.css';
+@import './cmps/email-filter.css';
 @import './pages/EmailApp.css';
 
 * {
