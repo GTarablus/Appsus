@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 80%;
-  height: auto;
+  min-height: 1000px;
   overflow: auto;
   background-color: rgba(187, 211, 255, 0.795);
 }

@@ -4,12 +4,13 @@ export class EmailFilter extends React.Component {
       sender: '',
       date: '',
       threads: '',
+      showRead: 'showAll',
     },
+    filterOn: false,
   };
   handleChange = (ev) => {
     const field = ev.target.name;
-    const value =
-      ev.target.type === 'number' ? +ev.target.value : ev.target.value;
+    const value = ev.target.value;
     this.setState(
       { filterBy: { ...this.state.filterBy, [field]: value } },
       () => {
@@ -17,6 +18,13 @@ export class EmailFilter extends React.Component {
       }
     );
   };
+  clearFilter = (ev) => {
+    ev.stopPropagation();
+    this.setState({ filterOn: false }, () => {
+      this.props.onSetFilter(this.state.filterOn);
+    });
+  };
+
   render() {
     const { sender, date } = this.setState;
     return (
@@ -39,13 +47,26 @@ export class EmailFilter extends React.Component {
           onChange={this.handleChange}
         />
 
+        <label htmlFor="showRead">By Read/ unread</label>
+        <select id="showRead" name="showRead" onChange={this.handleChange}>
+          <option value={'showAll'}>Show All</option>
+          <option value="unread">Show Unread</option>
+          <option value="read">Show read</option>
+        </select>
+
         <label htmlFor="byThreads">By Conversation</label>
         <select id="byThreads" name="threads" onChange={this.handleChange}>
           <option value="all">Show All</option>
           <option value="threads">Show Threads</option>
-          <option value="threads">Show Unreplied</option>
+          <option value="unreplied">Show Unreplied</option>
         </select>
-        <button>Filter</button>
+        <button
+          type="button"
+          className="clear-filter"
+          onClick={this.clearFilter}
+        >
+          Clear Filter
+        </button>
       </form>
     );
   }

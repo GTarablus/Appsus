@@ -13,7 +13,7 @@ export function EmailPreview({
       className={`email-preview ${email.isRead ? 'read' : 'unread'}`}
       onClick={() => (email.isRead ? null : toggleRead(email.id))}
     >
-      <Link to={`/email/${email.id}`}>
+      <Link to={`/email/details/${email.id}`}>
         <div>
           <h2 className="sender">{email.sender}</h2>
           <h4 className="from">{email.from}</h4>
@@ -21,13 +21,14 @@ export function EmailPreview({
         </div>
         <div>
           <p>{email.body}</p>
-          <h3>{utilService.getTimeFromStamp(email.sentAt)}</h3>
+          <h3>
+            {email.sentAt ? utilService.getTimeFromStamp(email.sentAt) : ''}
+          </h3>
         </div>
       </Link>
       <div className="quick-actions">
-        <button>Reply</button>
-        <button>Reply All</button>
-        <button>Forward</button>
+        {!email.isDraft ? <button>Reply</button> : null}
+        {!email.isDraft ? <button>Forward</button> : null}
         <button
           onClick={(ev) => {
             ev.stopPropagation();
@@ -63,6 +64,7 @@ export function EmailPreview({
           {' '}
           Star
         </button>
+        {email.isDraft ? <button>Edit</button> : null}
       </div>
     </div>
   );

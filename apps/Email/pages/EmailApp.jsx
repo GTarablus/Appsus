@@ -4,6 +4,7 @@ import { EmailList } from '../cmps/EmailList.jsx';
 import { EmailDetails } from '../cmps/EmailDetails.jsx';
 import { emailService } from '../services/email-service.js';
 import { EmailFilter } from '../cmps/EmailFilter.jsx';
+import { EmailComposer } from '../cmps/EmailComposer.jsx';
 
 export class EmailApp extends React.Component {
   state = {
@@ -48,8 +49,10 @@ export class EmailApp extends React.Component {
 
   setEmailsForDisplay = () => {
     const { emails, view } = this.state;
-    if (view === 'inbox') return emails.filter((email) => !email.isTrash);
-    else if (view === 'trash') return emails.filter((email) => email.isTrash);
+    if (view === 'inbox')
+      return emails.filter((email) => !email.isTrash && !email.isDraft);
+    else if (view === 'trash')
+      return emails.filter((email) => email.isTrash && !email.isDraft);
     else if (view === 'sent')
       return emails.filter((email) => email.from === 'me');
     else if (view === 'drafts') return emails.filter((email) => email.isDraft);
@@ -77,7 +80,19 @@ export class EmailApp extends React.Component {
           <div className="email-display">
             <EmailMenu onSetView={this.onSetView} />
             <Switch>
-              <Route path="/email/:id" component={EmailDetails} />
+              <Route
+                path="/email/details/:id"
+                render={(props) => (
+                  <EmailDetails
+                    {...props}
+                    emails={this.state.emails}
+                    toggleRead={this.toggleRead}
+                    onDeleteEmail={this.onDeleteEmail}
+                    onRestoreEmail={this.onRestoreEmail}
+                    onStarEmail={this.onStarEmail}
+                  />
+                )}
+              />
               <Route
                 path="/email"
                 render={(props) => (
@@ -93,6 +108,12 @@ export class EmailApp extends React.Component {
                 )}
               />
             </Switch>
+            <Route
+              path="/email/compose"
+              render={(props) => (
+                <EmailComposer {...props} onSetFilter={this.onSetFilter} />
+              )}
+            />
           </div>
         </div>
       </section>

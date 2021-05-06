@@ -1,6 +1,11 @@
+const { Link } = ReactRouterDOM;
+
 export function EmailMenu({ onSetView }) {
   return (
     <div className="email-menu">
+      <Link to="/email/compose">
+        <button className="compose-button">Compose</button>
+      </Link>
       <ul className="menu-actions clean-list">
         <li onClick={() => onSetView('inbox')}>Inbox</li>
         <li onClick={() => onSetView('sent')}>Outbox</li>

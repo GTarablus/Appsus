@@ -1,0 +1,33 @@
+.email-composer-container {
+  align-self: flex-end;
+  z-index: 10;
+  position: absolute;
+  border: 1px black solid;
+  top: 70%;
+  left: 78%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  min-height: 400px;
+  background-color: white;
+}
+
+.composer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 400px;
+}
+h4 {
+  margin: 0;
+}
+.composer input,
+textarea {
+  border-top: 1px black solid;
+}
+
+.compose-header {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  max-height: 20px;
+}

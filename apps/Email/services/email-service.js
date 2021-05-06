@@ -2,17 +2,6 @@ import { utilService } from '../../../services/util-service.js';
 import { storageService } from '../../../services/storage-service.js';
 const KEY = 'emails';
 var gEmails = getEmails();
-var outboxEmails = [
-  {
-    id: utilService.makeId(),
-    sender: 'Kratos of Sparta',
-    subject: 'OutBoxTest',
-    body:
-      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
-    isRead: false,
-    sentAt: 1549312452,
-  },
-];
 
 function getEmails() {
   var fromStorage = storageService.loadFromStorage(KEY);
@@ -91,12 +80,15 @@ function _getIdxById(id) {
 
 function query(filterBy) {
   if (filterBy) {
-    var { sender, date, threads } = filterBy;
+    var { sender, date, threads, showRead } = filterBy;
+    if (showRead === 'read') showRead = true;
+    else if (showRead === 'unread') showRead = false;
     const filteredEmails = gEmails.filter((email) => {
-      return (
-        email.sender.toLowerCase().includes(sender.toLowerCase()) &&
-        email.sentDate.includes(date)
-      );
+      return showRead !== 'showAll'
+        ? email.isRead === showRead
+        : true &&
+            email.sender.toLowerCase().includes(sender.toLowerCase()) &&
+            email.sentDate.includes(date);
     });
     return Promise.resolve(filteredEmails);
   }
@@ -141,6 +133,11 @@ function starEmail(id) {
   return Promise.resolve();
 }
 
+function saveToEmails(email) {
+  gEmails.push(email);
+  storageService.saveToStorage(KEY, gEmails);
+}
+
 export const emailService = {
   gEmails,
   query,
@@ -149,4 +146,5 @@ export const emailService = {
   deleteEmail,
   restoreEmail,
   starEmail,
+  saveToEmails,
 };
