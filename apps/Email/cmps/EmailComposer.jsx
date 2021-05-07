@@ -113,7 +113,9 @@ export class EmailComposer extends React.Component {
           </Link>
         </form>
         <div className="compose-actions">
-          <button>Send to Note</button>
+          <Link to={`/keep/edit/title=${subject}&body=${body}`}>
+            <button>Send to Note</button>
+          </Link>
         </div>
       </div>
     );
