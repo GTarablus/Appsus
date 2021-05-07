@@ -15,37 +15,6 @@
     flex-direction: column;
     z-index: 20;
 }
-
-.expanded-input .input-add-labels {
-    display: flex;
-    justify-content: space-around;
-    width: 40%;
-    align-self: center;
-}
-
-.expanded-input .note-add-input {
-    min-height: 5rem;
-    width: 100%;
-}
-
-.expanded-input .input-add-btns {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-.expanded-input .note-add-input-title {
-    width: 100%;
-    font-weight: 600;
-    font-size: 1.2rem;
-}
-
-.expanded-input .note-add-input-title, .note-add-input {
-    border: none;
-    padding: 0;
-    outline: none;
-}
-
 .note-add-input {
     flex-grow: 1;
     margin: 0px;
@@ -88,4 +57,54 @@
     background-color: transparent;
     align-self: flex-start;
     cursor: pointer;
+}
+
+
+.input-add-btns {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+   
+}
+.input-add-btns button{
+    font-size: 0.9rem;
+}
+.input-add-btns button{
+    padding: 6px 8px;
+    transition: .2s;
+    border-radius: 4px;
+}
+.input-add-btns button:first-child:hover{
+    background-color: rgb(223, 221, 221);
+}
+.input-add-btns button:last-child{
+    background-color: rgb(0, 118, 253);
+    color: white;
+}
+
+
+/* EXPANDED INPUT */
+.expanded-input .input-add-labels {
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+    align-self: center;
+}
+
+.expanded-input .note-add-input {
+    min-height: 5rem;
+    width: 100%;
+}
+
+
+.expanded-input .note-add-input-title {
+    width: 100%;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.expanded-input .note-add-input-title, .note-add-input {
+    border: none;
+    padding: 0;
+    outline: none;
 }

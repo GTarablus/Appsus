@@ -2,6 +2,7 @@ import { IconVideo } from './icon-cmps/IconVideo.jsx'
 import { IconImage } from './icon-cmps/IconImage.jsx'
 import { IconTodo } from './icon-cmps/IconTodo.jsx'
 import { IconText } from './icon-cmps/IconText.jsx'
+import { IconMap } from './icon-cmps/IconMap.jsx'
 export class NoteAdd extends React.Component {
     state = {
         type: 'NoteText',
@@ -14,9 +15,10 @@ export class NoteAdd extends React.Component {
     getPlaceholder = () => {
         switch (this.state.type) {
             case 'NoteText': return 'Take A Note...'
-            case 'NoteImg': return 'Enter An Image Url'
-            case 'NoteTodo': return 'Enter A Comma-Separted List '
-            case 'NoteVideo': return 'Enter A Youtube Url'
+            case 'NoteImg': return 'Enter An Image Url...'
+            case 'NoteTodo': return 'Enter A Comma-Separted List... '
+            case 'NoteVideo': return 'Enter A Youtube Url...'
+            case 'NoteMap' : return 'Enter Any Location...'
 
         }
     }
@@ -55,8 +57,9 @@ export class NoteAdd extends React.Component {
                     <input type="radio" name="type" value='NoteVideo' id="video-type" onChange={this.handleChange} />
                     <IconVideo />
                 </label>
-                <label htmlFor="map-type">Map
+                <label htmlFor="map-type">
                     <input type="radio" name="type" value='NoteMap' id="map-type" onChange={this.handleChange} />
+                    <IconMap/>
                 </label>
             </div>
             {isInputFocus &&  <div className="input-add-btns">
