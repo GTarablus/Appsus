@@ -5,6 +5,7 @@ import { IconPalette } from './icon-cmps/IconPalette.jsx'
 import { IconTrash } from './icon-cmps/iconTrash.jsx'
 import { IconPin } from './icon-cmps/IconPin.jsx'
 import {IconEdit} from './icon-cmps/IconEdit.jsx'
+import { IconEmail } from './icon-cmps/IconEmail.jsx';
 class _NotePreview extends React.Component {
 
     //the dynamic component
@@ -32,8 +33,10 @@ class _NotePreview extends React.Component {
             </div>
             <DynamicNote note={note}{...this.props} type={note.type} />
             <div className="note-preview-buttons" onClick={(ev) => ev.stopPropagation()}>
+
                 <IconPalette style={this.state.style} note={this.props.note} updateColor={this.updateColor} />
                 <Link to={`/keep/edit/${note.id}`}><IconEdit/></Link>
+                <IconEmail note={note}/>
                 <button onClick={() => onRemoveNote(note.id)}><IconTrash /></button>
             </div>
         </div>
