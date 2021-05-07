@@ -53,7 +53,7 @@ onFilter=(filterBy)=>{
     if(!notes) return <div>Loading...</div>
     return (
       <section className="keep-app" >
-        <h1>this is the keepApp </h1>
+    
         <NoteAdd onSaveNote={this.onSaveNote}/>
         <NoteFilter onFilter={this.onFilter}/>
         {notes.some(note=>note.isPinned)&& <div className="pinned-notes-section">
