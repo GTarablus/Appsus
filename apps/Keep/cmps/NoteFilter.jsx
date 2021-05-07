@@ -1,3 +1,5 @@
+import { IconSearch } from './icon-cmps/IconSearch.jsx';
+
 export class NoteFilter extends React.Component {
     state = {
         filterBy:{
@@ -16,7 +18,10 @@ handleChange=({target})=>{
     render() {
        const {txt}=this.state
         return <div className="note-filter">
+            <div className="input-container">
         <input type="text" name="txt" value={txt} onChange={this.handleChange} placeholder="Search for Your Notes"/>
+            <IconSearch/>
+            </div>
         </div>
     }
 

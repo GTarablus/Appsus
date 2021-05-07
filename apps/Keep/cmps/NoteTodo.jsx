@@ -6,38 +6,41 @@ export class NoteTodo extends React.Component{
 
     state={
         note:null,
-        todos:null,
         inputTodoTxt:''
     }
     componentDidMount(){
-            this.setState({note:this.props.note,todos:this.props.note.info.todos})
+            this.setState({note:this.props.note})
     }
     onToggleTodo=(todoId)=>{
-        const updatedTodos=this.state.todos;
+        const updatedTodos=this.state.note.info.todos;
         const todoIdx=updatedTodos.findIndex(todo=>todo.id===todoId)
         updatedTodos[todoIdx].doneAt=(updatedTodos[todoIdx].doneAt)? null:Date.now();
         this.updateAndSaveTodos(updatedTodos)
     }
     onRemoveTodo=(todoId)=>{
-        const updatedTodos=this.state.todos;
+        const updatedTodos=this.state.note.info.todos;
         const todoIdx=updatedTodos.findIndex(todo=>todo.id===todoId)
         updatedTodos.splice(todoIdx,1)
         this.updateAndSaveTodos(updatedTodos)
     }
     updateAndSaveTodos(updatedTodos){
-        
+       
         this.setState(prevState=>({
             note:{
                 ...prevState.note,
+                style:this.props.note.style,
                 info:{
                     ...prevState.note.info,
                     todos:updatedTodos
                 }
             }
-            }),()=> eventBusService.emit('save-todos',this.state.note))
+            }),()=> {
+                console.log(this.state.note,'in updated and save todos')
+                eventBusService.emit('save-note',this.state.note)
+            })
     }
     onAddTodo=()=>{
-        const updatedTodos=this.state.todos;
+        const updatedTodos=this.state.note.info.todos;
         updatedTodos.unshift({txt:this.state.inputTodoTxt,doneAt:null,id:utilService.makeId()})
         this.updateAndSaveTodos(updatedTodos)
         this.setState(prevState=>({
@@ -57,11 +60,10 @@ export class NoteTodo extends React.Component{
     }
     render (){
         const {note,todos,inputTodoTxt}=this.state
-        
         if(!note) return <div>loading</div>
         return <div className="note-todo">
-          <TodoList todos={todos} onToggleTodo={this.onToggleTodo} onAddTodo={this.onAddTodo} onRemoveTodo={this.onRemoveTodo} />
-            <input type="text" value={inputTodoTxt} onChange={this.handleChange} onKeyDown={this.checkEnter} placeholder="add an item to your list..."/>
+          <TodoList todos={note.info.todos} onToggleTodo={this.onToggleTodo} onAddTodo={this.onAddTodo} onRemoveTodo={this.onRemoveTodo}  />
+            <input style={this.props.note.style} type="text" value={inputTodoTxt} onChange={this.handleChange} onKeyDown={this.checkEnter} placeholder="add an item to your list..."/>
         </div>
     }
 

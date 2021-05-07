@@ -3,6 +3,10 @@
     margin:0px auto;
     display: block;
 }
+.clean-list{
+    list-style-type: none;
+    display: flex;
+}
 #root{
     min-height: 100vh;
 }

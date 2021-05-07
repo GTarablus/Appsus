@@ -1,4 +1,4 @@
-export function NoteText({info}){
+export function NoteText({note}){
 
-    return <div className="note-text">{info.txt}</div>
+    return <div className="note-text">{note.info.txt}</div>
 }

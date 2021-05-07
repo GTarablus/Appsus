@@ -6,36 +6,30 @@ import { IconTrash } from './icon-cmps/iconTrash.jsx'
 import { IconPin } from './icon-cmps/IconPin.jsx'
 import {IconEdit} from './icon-cmps/IconEdit.jsx'
 import { IconEmail } from './icon-cmps/IconEmail.jsx';
+import { IconClone } from './icon-cmps/IconClone.jsx';
+import { noteService } from '../services/note-service.js';
+import {DynamicIcon} from './DynamicIcon.jsx'
 class _NotePreview extends React.Component {
 
-    //the dynamic component
-    state = {
-        style: this.props.note.style,
-    }
+   
 
-    updateColor = ({ target }) => {
-        this.setState(prevState => ({
-            style: {
-                ...prevState.style,
-                backgroundColor: target.value
-            }
-        }), () => {
-            this.props.note.style = this.state.style
-            this.props.onSaveNote(this.props.note)
-        })
-    }
+onUpdateColor=({target})=>{
+    this.props.updateColor(this.props.note.id,target.value)
+}
     render() {
-        const { note, onRemoveNote } = this.props
+        const { onRemoveNote ,onCloneNote,note} = this.props
+     
         return <div className="note-preview" style={note.style} >
+            {/* <DynamicIcon type={note.type}/> */}
             <div className="note-preview-header">
-                <button className="pin-btn" onClick={() => this.props.onTogglePinNote(this.props.note)}><IconPin /></button>
                {note.title&&<h3>{note.title}</h3>}
             </div>
             <DynamicNote note={note}{...this.props} type={note.type} />
             <div className="note-preview-buttons" onClick={(ev) => ev.stopPropagation()}>
-
-                <IconPalette style={this.state.style} note={this.props.note} updateColor={this.updateColor} />
+                <IconPalette style={note.style} note={note} updateColor={this.onUpdateColor} />
                 <Link to={`/keep/edit/${note.id}`}><IconEdit/></Link>
+                <button className="pin-btn" onClick={() => this.props.onTogglePinNote(this.props.note)}><IconPin /></button>
+                <IconClone onCloneNote={onCloneNote} note={note} />
                 <IconEmail note={note}/>
                 <button onClick={() => onRemoveNote(note.id)}><IconTrash /></button>
             </div>

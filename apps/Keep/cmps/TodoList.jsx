@@ -1,5 +1,5 @@
 import {TodoPreview} from './TodoPreview.jsx'
-export function TodoList({todos,onToggleTodo,onRemoveTodo,onAddTodo}){
+export function TodoList({todos,onToggleTodo,onRemoveTodo}){
 
     if(!todos) return <div></div>
     return <div className="todo-list">

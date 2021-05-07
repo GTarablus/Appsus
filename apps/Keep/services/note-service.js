@@ -5,26 +5,31 @@ export const noteService = {
     removeNoteById,
     getNoteById,
     updateNoteStyleById,
-    createNoteInfo
+    createNoteInfo,
+    cloneNote,
+    updateColorById
 }
 
 let gNotes = [
     {
         id: utilService.makeId(),
         isPinned: false,
-        title:'',
+        title: '',
         type: 'NoteText',
         info: {
             txt: 'Fullstack Me Baby!'
         },
         style: {
             backgroundColor: '#ffffff',
-            color: 'black'
-        }
+           color: 'black',
+           fontSize:'14px',
+           fontFamily:'sans-serif',
+           textAlign:'center'
+       }
     },
     {
         id: utilService.makeId(),
-        title:'',
+        title: '',
         isPinned: false,
         type: 'NoteVideo',
         info: {
@@ -32,16 +37,19 @@ let gNotes = [
             title: '',
             videoId: '8ucz_pm3LX8'
         },
-        style: {
-            backgroundColor: '#121212',
-            color: '#ffffff'
-        }
+        style:{
+            backgroundColor: '#ffffff',
+           color: 'black',
+           fontSize:'14px',
+           fontFamily:'sans-serif',
+           textAlign:'center'
+       }
     },
     {
         id: utilService.makeId(),
         label: 'Todos',
         type: 'NoteTodo',
-        title:'',
+        title: '',
         isPinned: false,
         info: {
             todos: [{
@@ -61,15 +69,19 @@ let gNotes = [
             }
             ]
         },
-        style: {
+        style:{
             backgroundColor: '#ffffff',
-        }
+           color: 'black',
+           fontSize:'14px',
+           fontFamily:'sans-serif',
+           textAlign:'center'
+       }
 
     },
     {
         id: utilService.makeId(),
         type: 'NoteImg',
-        title:'',
+        title: '',
         isPinned: false,
         info: {
             type: 'NoteImg',
@@ -78,18 +90,22 @@ let gNotes = [
         },
         style: {
             backgroundColor: '#ffffff',
-        }
+           color: 'black',
+           fontSize:'14px',
+           fontFamily:'sans-serif',
+           textAlign:'center'
+       }
     }
 ]
 
 function query(filterBy) {
-    console.log('in query' , filterBy)
-    if(!filterBy) return Promise.resolve(gNotes)
-   const {txt} =filterBy
-   const filteredNotes=gNotes.filter(note=>{
-        return _isNoteInFilter(note,txt)
+    
+    if (!filterBy) return Promise.resolve(gNotes)
+    const { txt } = filterBy
+    const filteredNotes = gNotes.filter(note => {
+        return _isNoteInFilter(note, txt)
     })
-   return Promise.resolve(filteredNotes)
+    return Promise.resolve(filteredNotes)
 }
 
 function getNoteById(noteId) {
@@ -102,8 +118,16 @@ function saveNote(note) {
     return note.id ? _updateNote(note) : _addNote(note)
 }
 
+function cloneNote(noteToClone){
+    const clonedNote=JSON.parse(JSON.stringify(noteToClone))
+    const noteIdx = gNotes.findIndex(note => note.id === noteToClone.id)
+    clonedNote.id=utilService.makeId();
+    gNotes.splice(noteIdx,0,clonedNote)
+    return Promise.resolve()
+}
+
 function _updateNote(noteToUpdate) {
-    console.log('note of the todo note',noteToUpdate)
+    console.log('note of the todo note', noteToUpdate)
     const noteIdx = gNotes.findIndex(note => note.id === noteToUpdate.id)
     gNotes.splice(noteIdx, 1, noteToUpdate)
     return Promise.resolve()
@@ -114,14 +138,17 @@ function _updateNote(noteToUpdate) {
 function _addNote(note) {
     const addedNote = {
         id: utilService.makeId(),
-        title:note.title,
+        title: note.title,
         label: '',
         type: note.type,
         isPinned: false,
         info: createNoteInfo(note),
-        style: {
-            backgroundColor: '#ffffff',
-            color: 'black'
+        style: note.style ? note.style : {
+             backgroundColor: '#ffffff',
+            color: 'black',
+            fontSize:'14px',
+            fontFamily:'sans-serif',
+            textAlign:'center'
         }
     }
     gNotes.unshift(addedNote)
@@ -129,20 +156,25 @@ function _addNote(note) {
 
 
 }
-function updateNoteStyleById(noteId,style){
-     console.log('in update style')
+function updateNoteStyleById(noteId, style) {
+    console.log('in update style')
     console.log(style)
-   const note= gNotes.find(note=>noteId===note.id)
-   console.log(note)
-   note.style=style;
+    const note = gNotes.find(note => noteId === note.id)
+    note.style = style;
     return Promise.resolve()
+}
+function updateColorById(noteId,bgColor){
+    let note = gNotes.find(note => noteId === note.id)
+    note=JSON.parse(JSON.stringify(note))
+    note.style.backgroundColor = bgColor;
+    return _updateNote(note)
 }
 function createNoteInfo(note) {
     switch (note.type) {
         case 'NoteImg': return _createImgInfo(note)
         case 'NoteTodo': return _createTodoInfo(note)
         case 'NoteVideo': return _createVideoInfo(note)
-        case 'NoteMap' : return _createMapInfo(note)
+        case 'NoteMap': return _createMapInfo(note)
         default: return _createTextInfo(note)
     }
 }
@@ -160,17 +192,17 @@ function _createImgInfo(note) {
     return addedInfo;
 }
 function _createTodoInfo(note) {
-    if(!note.txt) note.txt='';
+    if (!note.txt) note.txt = '';
     const todos = note.txt.split(',');
     const addedInfo = {
-            todos: todos.map(todo => {
-                return {
-                    id: utilService.makeId(),
-                    txt: todo,
-                    doneAt: null
-                }
-            })
-        }
+        todos: todos.map(todo => {
+            return {
+                id: utilService.makeId(),
+                txt: todo,
+                doneAt: null
+            }
+        })
+    }
     return addedInfo;
 }
 function _createVideoInfo(note) {
@@ -178,22 +210,23 @@ function _createVideoInfo(note) {
     const idIdx = note.txt.search('v=')
     if (idIdx === -1) return Promise.reject('could not find the video')
     const addedInfo = {
-            url: note.txt,
-            videoId: note.txt.substring(idIdx + 2)
+        url: note.txt,
+        videoId: note.txt.substring(idIdx + 2)
     }
     return addedInfo;
 }
-function _createMapInfo(note){
+function _createMapInfo(note) {
     const addedInfo = {
         locName: note.txt,
     }
     return addedInfo;
 }
-function _isNoteInFilter(note,txt){
-   txt= txt.toUpperCase()
-    if(note.title.toUpperCase().includes(txt))return true
-    if(note.type==='NoteText'&&  note.info.txt.toUpperCase().includes(txt)) return true
-    if(note.type==='NoteTodo' && note.info.todos.some(todo=>todo.txt.toUpperCase().includes(txt))) return true
+function _isNoteInFilter(note, txt) {
+   
+    txt = txt.toUpperCase()
+    if (note.title.toUpperCase().includes(txt)) return true
+    if (note.type === 'NoteText' && note.info.txt.toUpperCase().includes(txt)) return true
+    if (note.type === 'NoteTodo' && note.info.todos.some(todo => todo.txt.toUpperCase().includes(txt))) return true
     return false
 }
 

@@ -1,5 +1,4 @@
 .note-preview{
-    
     border: 1px solid rgb(212, 212, 212); 
     margin-inline-end: 0.5rem;
     page-break-inside: avoid;
@@ -19,8 +18,7 @@
 }
 .note-preview h3{
     margin: 0;
-    padding: 0.5rem 0;
-    
+    padding:0 0.5rem 0;
     text-align: center;
     flex-grow:1;
 }
@@ -41,6 +39,7 @@ input[type="color"]{
     border: none;
     border-radius: 4px;
 }
+
 .note-preview svg{
     height:1.2rem;
     cursor: pointer;
@@ -59,12 +58,7 @@ input[type="color"]{
 .note-preview-buttons,.note-preview .pin-btn{
     opacity: 0;
     transition: .3s;
-}
-.note-preview .pin-btn{
-    position:relative;
-    left: 95%;
-    transform: rotate(46deg);
-    z-index: 5;
+
 }
 .note-preview button{
     padding: 0;

@@ -8,13 +8,13 @@ export const DynamicNote = (props) => {
 
     switch (props.type) {
         case 'NoteText':
-            return <NoteText info={props.note.info} />
+            return <NoteText note={props.note} />
         case 'NoteImg':
             return <NoteImg info={props.note.info} />
         case 'NoteVideo':
             return <NoteVideo info={props.note.info} />
         case 'NoteTodo':
-            return <NoteTodo info={props.note.info} {...props} />
+            return <NoteTodo info={props.note.info} note={props.note} {...props} />
         case 'NoteMap':
             return <NoteMap info={props.note.info} {...props}/>
         //   default:

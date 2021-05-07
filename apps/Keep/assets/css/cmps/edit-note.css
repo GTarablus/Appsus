@@ -17,11 +17,16 @@
     font-size: 1.5rem;
     font-weight: 600;
    
+   
 }
 .edit-note input[type="text"] , .edit-note textarea{
     border: none;
     outline: none;
     background-color: transparent;
+}
+.edit-note textarea { 
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 0.9rem;
 }
 .edit-note .edit-content {
     flex-grow: 1;
@@ -63,8 +68,21 @@
     transition: .2s;
 }
 
-.edit-note .action-btns {
+.edit-note  .action-btns {
     display: flex;
     justify-content: space-between;
     padding: 1rem 1.25rem
+}
+.edit-note .action-btns button{
+    padding: 6px 8px;
+    transition: .2s;
+    border-radius: 4px;
+    border: none;
+}
+.edit-note .action-btns button:first-child:hover{
+    background-color: rgb(223, 221, 221);
+}
+.edit-note .action-btns button:last-child{
+    background-color: rgb(0, 118, 253);
+    color: white;
 }

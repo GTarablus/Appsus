@@ -9,6 +9,7 @@ import { NoteFilter } from '../cmps/NoteFilter.jsx';
 export class KeepApp extends React.Component {
 
   removeEvent;
+  removeTodosEvent;
   state = {
     notes: null,
     filterBy: {
@@ -30,6 +31,7 @@ export class KeepApp extends React.Component {
     }
     else this.loadNotes()
     this.removeEvent = eventBusService.on('save-note', (note) => this.onSaveNote(note))
+ 
 
   }
 
@@ -38,6 +40,7 @@ export class KeepApp extends React.Component {
   }
   loadNotes = () => {
     noteService.query(this.state.filterBy).then(notes => this.setState({ notes }))
+    console.log('loadNotes')
   }
 
   onRemoveNote = (id) => {
@@ -53,10 +56,15 @@ export class KeepApp extends React.Component {
     noteService.saveNote(note).then(() => this.loadNotes())
   }
   //on update color 
-
+  updateColor=(noteId,backgroundColor)=>{
+    noteService.updateColorById(noteId,backgroundColor).then(()=>this.loadNotes())
+  }
   onFilter = (filterBy) => {
     console.log('set filter')
     this.setState({ filterBy: { ...this.state.filterBy, ...filterBy } }, this.loadNotes)
+  }
+  onCloneNote=(note)=>{
+    noteService.cloneNote(note).then(()=>this.loadNotes())
   }
 
   render() {
@@ -68,10 +76,10 @@ export class KeepApp extends React.Component {
         <NoteFilter onFilter={this.onFilter} />
         {notes.some(note => note.isPinned) && <div className="pinned-notes-section">
           <h3>PINNED <IconPin /> </h3>
-          <NotesList notes={notes.filter(note => note.isPinned)} onSaveNote={this.onSaveNote} onRemoveNote={this.onRemoveNote} onTogglePinNote={this.onTogglePinNote} />
+          <NotesList notes={notes.filter(note => note.isPinned)} onSaveNote={this.onSaveNote} onRemoveNote={this.onRemoveNote} onTogglePinNote={this.onTogglePinNote} updateColor={this.updateColor} onCloneNote={this.onCloneNote}/>
         </div>}
         <Route component={EditNote} path="/keep/edit/:noteId" />
-        <NotesList notes={notes.filter(note => !note.isPinned)} onSaveNote={this.onSaveNote} onRemoveNote={this.onRemoveNote} onTogglePinNote={this.onTogglePinNote} />
+        <NotesList notes={notes.filter(note => !note.isPinned)} onSaveNote={this.onSaveNote} onRemoveNote={this.onRemoveNote} onTogglePinNote={this.onTogglePinNote} updateColor={this.updateColor} onCloneNote={this.onCloneNote} />
       </section>
     );
   }
