@@ -13,6 +13,7 @@ function getEmails() {
         sender: 'Kratos of Sparta',
         from: 'godofwar@olympus.gov',
         subject: 'Email 1',
+        to: 'r&d@apssus.com',
         body:
           'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
         isRead: false,
@@ -25,6 +26,8 @@ function getEmails() {
         sender: 'Peter Parker',
         from: 'underoos@starkindustries.com',
         subject: 'Email 2',
+        to: 'r&d@apssus.com',
+
         body:
           'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
         isRead: false,
@@ -37,6 +40,8 @@ function getEmails() {
         sender: 'Argaorn, son of Arathorn',
         from: 'king@gondor.me',
         subject: 'Email 3',
+        to: 'r&d@apssus.com',
+
         body:
           'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
         isRead: false,
@@ -49,6 +54,7 @@ function getEmails() {
         sender: 'Nemo Bemo',
         from: 'hungry@feedme.now',
         subject: 'Email 4',
+        to: 'r&d@apssus.com',
         body:
           'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
         isRead: false,
@@ -61,6 +67,7 @@ function getEmails() {
         sender: 'Tal Tarablus',
         from: 'fatfuck@siblings.com',
         subject: 'Email 5',
+        to: 'r&d@apssus.com',
         body:
           'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
         isRead: false,
@@ -133,6 +140,14 @@ function starEmail(id) {
   return Promise.resolve();
 }
 
+function saveToDrafts(email) {
+  var idx = _getIdxById(email.id);
+  if (idx !== -1) {
+    gEmails.splice(idx, 1);
+  }
+  gEmails.push(email);
+  storageService.saveToStorage(KEY, gEmails);
+}
 function saveToEmails(email) {
   gEmails.push(email);
   storageService.saveToStorage(KEY, gEmails);
@@ -146,5 +161,6 @@ export const emailService = {
   deleteEmail,
   restoreEmail,
   starEmail,
+  saveToDrafts,
   saveToEmails,
 };

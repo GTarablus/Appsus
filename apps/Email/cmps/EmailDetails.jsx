@@ -11,10 +11,13 @@ export function EmailDetails(props) {
       <div>
         <h2>{email.sender}</h2>
         <h3>{email.subject}</h3>
+        <h4>{`To: ${email.to}`}</h4>
       </div>
       <div>
         <p>{email.body}</p>
-        <h3>{utilService.getTimeFromStamp(email.sentAt)}</h3>
+        <h3>
+          {email.sentAt ? utilService.getTimeFromStamp(email.sentAt) : ''}
+        </h3>
       </div>
       <div className="email-actions">
         <button>Reply</button>

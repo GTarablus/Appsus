@@ -16,7 +16,7 @@ export function EmailPreview({
       <Link to={`/email/details/${email.id}`}>
         <div>
           <h2 className="sender">{email.sender}</h2>
-          <h4 className="from">{email.from}</h4>
+          <h4 className="from">{email.isSent ? email.to : email.from}</h4>
           <h3>{email.subject}</h3>
         </div>
         <div>
@@ -27,7 +27,12 @@ export function EmailPreview({
         </div>
       </Link>
       <div className="quick-actions">
-        {!email.isDraft ? <button>Reply</button> : null}
+        {!email.isDraft ? (
+          <Link to="/email/compose/:id">
+            <button>Reply</button>
+          </Link>
+        ) : null}
+
         {!email.isDraft ? <button>Forward</button> : null}
         <button
           onClick={(ev) => {
@@ -64,7 +69,11 @@ export function EmailPreview({
           {' '}
           Star
         </button>
-        {email.isDraft ? <button>Edit</button> : null}
+        {email.isDraft ? (
+          <Link to={`/email/compose/${email.id}`}>
+            <button>Edit</button>{' '}
+          </Link>
+        ) : null}
       </div>
     </div>
   );
