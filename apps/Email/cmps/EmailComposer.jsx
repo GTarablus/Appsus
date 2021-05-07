@@ -19,14 +19,17 @@ export class EmailComposer extends React.Component {
     const searchParams = new URLSearchParams(this.props.location.search);
     var subject = searchParams.get('subject');
     var body = searchParams.get('body');
-    if (subject || body) {
+    var to = searchParams.get('to');
+    if (subject || body || to) {
       subject ? subject : '';
       body ? body : '';
+      to ? to : '';
       this.setState({
         sentEmail: {
           ...this.state.sentEmail,
           ['subject']: subject,
           ['body']: body,
+          ['to']: to,
         },
       });
     }
@@ -34,7 +37,8 @@ export class EmailComposer extends React.Component {
 
   checkReceivedEmail() {
     var id = this.props.match.params.id;
-    if (id && id !== 'ompose') {
+    console.log(id);
+    if (id) {
       emailService.getEmailById(id).then((email) => {
         this.setState({ sentEmail: email });
       });
@@ -60,6 +64,9 @@ export class EmailComposer extends React.Component {
       sentEmail: { ...this.state.sentEmail, ['isDraft']: false },
     });
     var email = { ...this.state.sentEmail };
+    email.sentAt = Date.now() / 1000;
+    email.isDraft = false;
+    email.isSent = true;
     emailService.saveToEmails(email);
   };
   render() {
@@ -113,7 +120,7 @@ export class EmailComposer extends React.Component {
           </Link>
         </form>
         <div className="compose-actions">
-          <Link to={`/keep/edit/title=${subject}&body=${body}`}>
+          <Link to={`/keep?title=${subject}&body=${body}`}>
             <button>Send to Note</button>
           </Link>
         </div>

@@ -11,6 +11,7 @@ export class EmailApp extends React.Component {
     emails: null,
     view: 'inbox',
     filterBy: null,
+    sortBy: null,
   };
 
   componentDidMount() {
@@ -19,6 +20,15 @@ export class EmailApp extends React.Component {
 
   loadEmails = () => {
     emailService.query(this.state.filterBy).then((emails) => {
+      var unreadCount = () => {
+        var counter = 0;
+        for (var i = 0; i < emails.length; i++) {
+          if (!emails[i].isRead) counter++;
+        }
+        return counter;
+      };
+      this.setState({ unreadCount: unreadCount() });
+      if (this.state.sortBy) this.sortEmails(emails);
       this.setState({ emails: emails });
     });
   };
@@ -45,6 +55,25 @@ export class EmailApp extends React.Component {
   onSetFilter = (filterBy) => {
     this.setState({ filterBy }, this.loadEmails);
   };
+  onSetSort = (sortBy) => {
+    this.setState({ sortBy }, this.loadEmails);
+  };
+  sortEmails(arr) {
+    const { sortBy } = this.state;
+    arr.sort(function (a, b) {
+      if (sortBy === 'sender') {
+        if (a.sender < b.sender) return -1;
+        if (a.sender > b.sender) return 1;
+        return 0;
+      } else if (sortBy === 'date') {
+        if (a.sentAt < b.sentAt) return 1;
+        if (a.sentAt > b.sentAt) return -1;
+        return 0;
+      } else if (sortBy === 'read') {
+        return a.isRead === b.isRead ? 0 : a ? -1 : 1;
+      }
+    });
+  }
 
   setEmailsForDisplay = () => {
     const { emails, view } = this.state;
@@ -52,15 +81,14 @@ export class EmailApp extends React.Component {
       return emails.filter((email) => !email.isTrash && !email.isDraft);
     else if (view === 'trash')
       return emails.filter((email) => email.isTrash && !email.isDraft);
-    else if (view === 'sent')
-      return emails.filter((email) => email.from === 'me');
+    else if (view === 'sent') return emails.filter((email) => email.isSent);
     else if (view === 'drafts') return emails.filter((email) => email.isDraft);
     else if (view === 'starred')
       return emails.filter((email) => email.isStarred);
   };
 
   render() {
-    const { emails } = this.state;
+    const { emails, unreadCount } = this.state;
     if (!emails) {
       return (
         <section>
@@ -75,16 +103,19 @@ export class EmailApp extends React.Component {
           <h2>Welcome to Email!</h2>
         </div>
         <div className="emails-main-container">
-          <EmailFilter onSetFilter={this.onSetFilter} />
+          <EmailFilter
+            onSetFilter={this.onSetFilter}
+            onSetSort={this.onSetSort}
+          />
           <div className="email-display">
-            <EmailMenu onSetView={this.onSetView} />
+            <EmailMenu onSetView={this.onSetView} unreadCount={unreadCount} />
             <Switch>
               <Route
                 path="/email/details/:id"
                 render={(props) => (
                   <EmailDetails
                     {...props}
-                    emails={this.state.emails}
+                    emails={emails}
                     toggleRead={this.toggleRead}
                     onDeleteEmail={this.onDeleteEmail}
                     onRestoreEmail={this.onRestoreEmail}

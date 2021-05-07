@@ -70,7 +70,7 @@ function getRandomIntInclusive(min, max) {
 function getTimeFromStamp(timeStamp) {
   // Create a new JavaScript Date object based on the timeStamp
   // multiplied by 1000 so that the argument is in milliseconds, not seconds.
-  var date = new Date(timeStamp * 1000);
+  var date = new Date(timeStamp);
   // Hours part from the timestamp
   var hours = date.getHours();
   // Minutes part from the timestamp
@@ -86,6 +86,5 @@ function getDateFromStamp(timeStamp) {
   var month = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth();
   var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
   var formattedDate = `${year}-${month}-${day}`;
-  console.log(formattedDate);
   return formattedDate;
 }

@@ -25,10 +25,20 @@ export class EmailFilter extends React.Component {
     });
   };
 
+  handleSort = (ev) => {
+    this.props.onSetSort(ev.target.value);
+  };
+
   render() {
     const { sender, date } = this.setState;
     return (
-      <form className="email-filter" onSubmit={this.onFilter}>
+      <form className="email-filter">
+        <label htmlFor="sort">Sort:</label>
+        <select id="sort" name="sort" onChange={this.handleSort}>
+          <option value="sender">Sender</option>
+          <option value="read">Read/ Unread</option>
+          <option value="date">Date</option>
+        </select>
         <label htmlFor="bySender">By Sender</label>
         <input
           type="text"
@@ -49,17 +59,11 @@ export class EmailFilter extends React.Component {
 
         <label htmlFor="showRead">By Read/ unread</label>
         <select id="showRead" name="showRead" onChange={this.handleChange}>
-          <option value={'showAll'}>Show All</option>
+          <option value="showAll">Show All</option>
           <option value="unread">Show Unread</option>
           <option value="read">Show read</option>
         </select>
 
-        <label htmlFor="byThreads">By Conversation</label>
-        <select id="byThreads" name="threads" onChange={this.handleChange}>
-          <option value="all">Show All</option>
-          <option value="threads">Show Threads</option>
-          <option value="unreplied">Show Unreplied</option>
-        </select>
         <button
           type="button"
           className="clear-filter"

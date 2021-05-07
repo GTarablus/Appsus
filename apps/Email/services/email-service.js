@@ -87,20 +87,30 @@ function _getIdxById(id) {
 
 function query(filterBy) {
   if (filterBy) {
-    var { sender, date, threads, showRead } = filterBy;
-    if (showRead === 'read') showRead = true;
-    else if (showRead === 'unread') showRead = false;
-    const filteredEmails = gEmails.filter((email) => {
-      return showRead !== 'showAll'
-        ? email.isRead === showRead
-        : true &&
-            email.sender.toLowerCase().includes(sender.toLowerCase()) &&
-            email.sentDate.includes(date);
-    });
+    const filteredEmails = filterEmails(filterBy);
     return Promise.resolve(filteredEmails);
   }
-
   return Promise.resolve(gEmails);
+}
+
+function filterEmails(filterBy) {
+  var { sender, date, showRead } = filterBy;
+  if (!sender) sender = '';
+  if (!date) date = '';
+  var filteredEmails = gEmails.filter((email) => {
+    return email.sender.toLowerCase().includes(sender.toLowerCase()) &&
+      email.sentDate
+      ? email.sentDate.includes(date)
+      : true;
+  });
+  if (showRead === 'showAll') return filteredEmails;
+  else {
+    var bool = showRead === 'read' ? true : false;
+    filteredEmails = filteredEmails.filter((email) => {
+      return email.isRead === bool;
+    });
+    return filteredEmails;
+  }
 }
 
 function getEmailById(id) {

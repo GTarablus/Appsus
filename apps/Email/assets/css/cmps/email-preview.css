@@ -1,7 +1,13 @@
 .email-preview {
-  height: 200px;
+  min-height: 200px;
   border: solid 1px black;
 }
+
+.preview-content {
+  display: flex;
+  justify-content: space-between;
+}
+
 .email-preview * {
   margin: 5px;
   text-decoration: none;

@@ -13,27 +13,39 @@ export function EmailPreview({
       className={`email-preview ${email.isRead ? 'read' : 'unread'}`}
       onClick={() => (email.isRead ? null : toggleRead(email.id))}
     >
-      <Link to={`/email/details/${email.id}`}>
-        <div>
+      <Link className="preview-content" to={`/email/details/${email.id}`}>
+        <div className="details-preivew">
           <h2 className="sender">{email.sender}</h2>
           <h4 className="from">{email.isSent ? email.to : email.from}</h4>
           <h3>{email.subject}</h3>
-        </div>
-        <div>
           <p>{email.body}</p>
+        </div>
+        <div className="time-details">
           <h3>
-            {email.sentAt ? utilService.getTimeFromStamp(email.sentAt) : ''}
+            {(email.sentAt ? utilService.getDateFromStamp(email.sentAt) : '') +
+              ' ' +
+              (email.sentAt ? utilService.getTimeFromStamp(email.sentAt) : '')}
           </h3>
         </div>
       </Link>
       <div className="quick-actions">
         {!email.isDraft ? (
-          <Link to="/email/compose/:id">
+          <Link
+            to={`/email/compose?subject=${'Re:' + email.subject}&to=${
+              email.from
+            }`}
+          >
             <button>Reply</button>
           </Link>
         ) : null}
 
-        {!email.isDraft ? <button>Forward</button> : null}
+        <Link
+          to={`/email/compose?subject=${'Fw:' + email.subject}&body=${
+            email.body
+          }`}
+        >
+          {!email.isDraft ? <button>Forward</button> : null}
+        </Link>
         <button
           onClick={(ev) => {
             ev.stopPropagation();
