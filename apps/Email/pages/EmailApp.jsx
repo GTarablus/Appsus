@@ -15,7 +15,6 @@ export class EmailApp extends React.Component {
 
   componentDidMount() {
     this.loadEmails();
-    console.log(this.state.emails);
   }
 
   loadEmails = () => {
@@ -109,7 +108,7 @@ export class EmailApp extends React.Component {
               />
             </Switch>
             <Route
-              path="/email/compose"
+              path="/email/compose/:id?"
               render={(props) => (
                 <EmailComposer {...props} onSetFilter={this.onSetFilter} />
               )}

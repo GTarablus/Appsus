@@ -16,11 +16,24 @@ export class EmailComposer extends React.Component {
 
   componentDidMount() {
     this.checkReceivedEmail();
+    const searchParams = new URLSearchParams(this.props.location.search);
+    var subject = searchParams.get('subject');
+    var body = searchParams.get('body');
+    if (subject || body) {
+      subject ? subject : '';
+      body ? body : '';
+      this.setState({
+        sentEmail: {
+          ...this.state.sentEmail,
+          ['subject']: subject,
+          ['body']: body,
+        },
+      });
+    }
   }
 
   checkReceivedEmail() {
-    var id = this.props.location.pathname;
-    id = id.substring(id.length - 6);
+    var id = this.props.match.params.id;
     if (id && id !== 'ompose') {
       emailService.getEmailById(id).then((email) => {
         this.setState({ sentEmail: email });
@@ -43,7 +56,6 @@ export class EmailComposer extends React.Component {
 
   onSendEmail = (ev) => {
     ev.stopPropagation();
-    console.log('hi');
     this.setState({
       sentEmail: { ...this.state.sentEmail, ['isDraft']: false },
     });
