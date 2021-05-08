@@ -3,11 +3,12 @@
 /* BookApp */
 @import '../../apps/Books/assets/css/main.css';
 
-/* KeepApp */
-@import '../../apps/Keep/assets/css/main.css';
 
 /* EmailApp */
 @import '../../apps/Email/assets/css/main.css';
+
+/* KeepApp */
+@import '../../apps/Keep/assets/css/main.css';
 
 /* Pages */
 @import '../css/pages/home.css';

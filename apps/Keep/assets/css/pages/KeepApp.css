@@ -1,6 +1,6 @@
 .keep-app {
-  max-width: 1040px;
-  margin:0px auto;
+ 
+  margin:2rem auto 0px;
   display: block;
   color: black;
 }
@@ -13,4 +13,19 @@
 .pinned-notes-section h3 svg{
   width:0.75rem;
   transform: rotate(30deg);
+}
+
+
+@media screen and (min-width:480px){
+
+}
+@media screen and (min-width:780px){
+  .keep-app {
+    max-width: 840px;
+  }
+}
+@media screen and (min-width:1040px){
+  .keep-app{
+    max-width: 1040px;
+  }
 }

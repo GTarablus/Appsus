@@ -18,7 +18,9 @@
 .style-edit-bar input[type="list"],
 .style-edit-bar label
 {
+    background-color: transparent;
    margin-inline-end: 1.5em;
+   
 }
 .style-edit-bar svg{
     width:1rem;

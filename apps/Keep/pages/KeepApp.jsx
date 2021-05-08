@@ -44,6 +44,7 @@ export class KeepApp extends React.Component {
   }
 
   onRemoveNote = (id) => {
+    console.log('onRemove Note')
     noteService.removeNoteById(id).then(() => this.loadNotes())
   }
 

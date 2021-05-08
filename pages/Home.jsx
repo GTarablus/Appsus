@@ -6,7 +6,7 @@ import { IconText } from '../apps/Keep/cmps/icon-cmps/IconText.jsx';
 export function Home() {
   return (
     <section className="home">
-    <img className="hero-banner" src="../assets/img/hero-banner.svg" alt=""/>
+    <img className="hero-banner" src="./assets/img/hero-banner.svg" alt=""/>
 <div className="apps-home-content">
         <div className="home-content-container">
           <IconEmail />

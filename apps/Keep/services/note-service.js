@@ -119,7 +119,7 @@ function query(filterBy) {
     if(!notes|| !notes.length) _createNotes();
     else gNotes=notes
 
-    
+
     if (!filterBy) return Promise.resolve(gNotes)
     const { txt } = filterBy
     const filteredNotes = gNotes.filter(note => {
@@ -143,6 +143,7 @@ function cloneNote(noteToClone){
     const noteIdx = gNotes.findIndex(note => note.id === noteToClone.id)
     clonedNote.id=utilService.makeId();
     gNotes.splice(noteIdx,0,clonedNote)
+    _saveNotesToStorage()
     return Promise.resolve()
 }
 
@@ -202,6 +203,12 @@ function createNoteInfo(note) {
         default: return _createTextInfo(note)
     }
 }
+function removeNoteById(noteId) {
+    const noteIdx = gNotes.findIndex(note => note.id === noteId)
+    gNotes.splice(noteIdx, 1);
+    _saveNotesToStorage()
+    return Promise.resolve()
+}
 function _createTextInfo(note) {
     const addedInfo = {
         txt: note.txt
@@ -258,9 +265,4 @@ function _saveNotesToStorage(){
     storageService.saveToStorage(NOTES_KEY,gNotes)
 }
 
-function removeNoteById(noteId) {
-    const noteIdx = gNotes.findIndex(note => note.id === noteId)
-    gNotes.splice(noteIdx, 1);
-    return Promise.resolve()
-}
 
