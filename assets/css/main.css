@@ -9,6 +9,8 @@
 /* EmailApp */
 @import '../../apps/Email/assets/css/main.css';
 
+/* Pages */
+@import '../css/pages/home.css';
 
 /* HELPERS */
 @import './helpers.css';

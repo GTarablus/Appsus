@@ -14,6 +14,7 @@ export function App() {
       <header>
     <AppHeader/>
       </header>
+      <main>
       <Switch>
         <Route component={BookDetails} path='/book/:bookId'/>
         <Route component={BookApp} path='/book'/>
@@ -21,6 +22,10 @@ export function App() {
         <Route component={KeepApp} path='/keep' />
         <Route component={Home} path='/' />
       </Switch>
+      </main>
+      <footer>
+
+      </footer>
     </Router>
   );
 }
