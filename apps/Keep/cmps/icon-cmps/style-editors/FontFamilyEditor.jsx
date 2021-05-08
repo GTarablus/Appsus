@@ -6,6 +6,9 @@ export function FontFamilyEditor({note,handleChange}){
         <option value="Arial"></option>
         <option value="Impact"></option>
         <option value="sans-serif"></option>
+        <option value="Dancing Script"></option>
+        <option value="Goblin One"></option>
+
         </datalist>
     </React.Fragment>
 }

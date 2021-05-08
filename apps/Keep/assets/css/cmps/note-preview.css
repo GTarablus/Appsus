@@ -39,6 +39,7 @@ input[type="color"]{
 .note-preview iframe{
     border: none;
     border-radius: 4px;
+    min-height: 15rem;
 }
 
 .note-preview svg{

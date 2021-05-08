@@ -1,10 +1,10 @@
 .header-search-container{
-width:50%;
-min-width: 30rem;
+width:100%;
+
 position: relative;
 align-self: flex-end;
 justify-content: center;
-margin: 0 auto;
+margin: 2rem auto;
 margin-bottom: 2rem;
 }
 .add-search-bar{
@@ -76,4 +76,17 @@ margin-bottom: 2rem;
 .book-result-preview button svg path{
     fill:  rgb(0, 118, 253);
 
+}
+
+@media screen and (min-width:480px){
+
+    .header-search-container{
+        width:80%;
+    }
+}
+@media screen and (min-width:760px){
+
+    .header-search-container{
+        width:50%;
+    }
 }

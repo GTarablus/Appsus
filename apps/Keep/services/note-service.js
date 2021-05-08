@@ -24,24 +24,23 @@ function _createNotes(){
     const notes = [
         {
             id: utilService.makeId(),
-            isPinned: false,
-            title: '',
+            isPinned: true,
+            title: 'Quote Of The Day ',
             type: 'NoteText',
             info: {
-                txt: 'Fullstack Me Baby!'
+                txt: 'I Win Or I Learn -TB12'
             },
             style: {
-                backgroundColor: '#ffffff',
-                color: 'black',
-                fontSize:'14px',
-                fontFamily:'sans-serif',
-                
+                backgroundColor: '#F59B7C',
+                color: '#B22222',
+                fontSize:'20px',
+                fontFamily:'Dancing Script',
                 textAlign:'center'
             }
         },
         {
             id: utilService.makeId(),
-            title: '',
+            title: 'My New Fav Song ❤',
             isPinned: false,
             type: 'NoteVideo',
             info: {
@@ -50,9 +49,9 @@ function _createNotes(){
                 videoId: '8ucz_pm3LX8'
             },
             style:{
-                backgroundColor: '#ffffff',
-                color: 'black',
-                fontSize:'14px',
+                backgroundColor: '#FED776',
+                color: '#ffffff',
+                fontSize:'18px',
                 fontFamily:'sans-serif',
                 textAlign:'center'
             }
@@ -61,7 +60,7 @@ function _createNotes(){
             id: utilService.makeId(),
             label: 'Todos',
             type: 'NoteTodo',
-            title: '',
+            title: 'To-Do List',
             isPinned: false,
             info: {
                 todos: [{
@@ -82,10 +81,9 @@ function _createNotes(){
             ]
         },
         style:{
-            backgroundColor: '#ffffff',
+            backgroundColor: '#F1F487',
             color: 'black',
-            fontSize:'14px',
-            
+            fontSize:'18px',
             fontFamily:'sans-serif',
             textAlign:'center'
         }
@@ -94,22 +92,122 @@ function _createNotes(){
     {
         id: utilService.makeId(),
         type: 'NoteImg',
-        title: '',
-        isPinned: false,
+        title: 'Be Like Mike',
+        isPinned: true,
         info: {
             type: 'NoteImg',
             imgUrl: 'https://static01.nyt.com/images/2020/05/16/business/16JORDAN-01sub/16JORDAN-01sub-superJumbo.jpg',
             title: ''
         },
         style: {
-            backgroundColor: '#ffffff',
-            color: 'black',
-            fontSize:'14px',
+            backgroundColor: '#F59B7C',
+            color: '#FF0000',
+            fontSize:'20px',
             
+            fontFamily:'Goblin One',
+            textAlign:'center'
+        }
+    },
+    {
+        id: utilService.makeId(),
+        type: 'NoteImg',
+        title: 'Next Vacay',
+        isPinned: true,
+        info: {
+            type: 'NoteImg',
+            imgUrl: 'https://s31606.pcdn.co/wp-content/uploads/2020/06/aerial-view-of-kualoa-area-of-oahu-hawaii-picture-id938335974-1.jpg',
+            title: ''
+        },
+        style: {
+            backgroundColor: '#8ED2CD',
+            color: '#FFffff',
+            fontSize:'20px',
+            fontFamily:'sana-serif',
+            textAlign:'center'
+        }
+    },
+    {
+        id: utilService.makeId(),
+        type: 'NoteImg',
+        title: 'Baliiiii',
+        isPinned: true,
+        info: {
+            type: 'NoteImg',
+            imgUrl: 'https://theworldtravelguy.com/wp-content/uploads/2020/05/DJI_0910-3.jpg',
+            title: ''
+        },
+        style: {
+            backgroundColor: '#C2ED98',
+            color: '#FFffff',
+            fontSize:'20px',
+            
+            fontFamily:'Dancing Script',
+            textAlign:'center'
+        }
+    },
+    {
+        id: utilService.makeId(),
+        isPinned: false,
+        title: 'Reminder #1',
+        type: 'NoteText',
+        info: {
+            txt: 'pay taxes '
+        },
+        style: {
+            backgroundColor: '#Ffffff',
+            color: '#121212',
+            fontSize:'20px',
+            fontFamily:'sans-serif',
+            textAlign:'center'
+        }
+    },
+    {
+        id: utilService.makeId(),
+        isPinned: false,
+        title: 'New Recipe To Try',
+        type: 'NoteText',
+        info: {
+            txt: `2 and 1/4 cups (280g) all-purpose flour (spoon & leveled)
+            1 teaspoon baking soda
+            1 and 1/2 teaspoons cornstarch*
+            1/2 teaspoon salt
+            3/4 cup (1.5 sticks or 170g) unsalted butter, melted & slightly cooled*
+            3/4 cup (150g) packed light or dark brown sugar
+            1/2 cup (100g) granulated sugar
+            1 large egg + 1 egg yolk, at room temperature
+            2 teaspoons pure vanilla extract
+            1 and 1/4 cups (225g) semi-sweet chocolate chips or chocolate chunks`
+        },
+        style: {
+            backgroundColor: '#Ffffff',
+            color: '#121212',
+            fontSize:'14px',
+            fontFamily:'sans-serif',
+            textAlign:'center'
+        }
+        
+    },
+    {
+        id: utilService.makeId(),
+        title: 'Some Zohar For The Soul',
+        isPinned: true,
+        type: 'NoteVideo',
+        info: {
+            url: 'https://www.youtube.com/watch?v=vcpgpEUlKfk',
+            title: '',
+            videoId: 'vcpgpEUlKfk'
+        },
+        style:{
+            backgroundColor: '#98A9D7',
+            color: '#ffffff',
+            fontSize:'18px',
             fontFamily:'sans-serif',
             textAlign:'center'
         }
     }
+
+    
+    
 ]
 gNotes=notes;
 }

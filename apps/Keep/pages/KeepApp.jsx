@@ -40,11 +40,11 @@ export class KeepApp extends React.Component {
   }
   loadNotes = () => {
     noteService.query(this.state.filterBy).then(notes => this.setState({ notes }))
-    console.log('loadNotes')
+   
   }
 
   onRemoveNote = (id) => {
-    console.log('onRemove Note')
+
     noteService.removeNoteById(id).then(() => this.loadNotes())
   }
 

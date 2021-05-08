@@ -43,7 +43,6 @@ export class EditNote extends React.Component {
         this.props.history.push('/keep')
     }
     handleChange = ({ target }) => {
-        console.log('in Handle Change ',target)
         const field = target.name
         const value = target.value
         const parentKey = target.dataset.parent
@@ -64,7 +63,7 @@ export class EditNote extends React.Component {
                     [field]: value,
                 }
             }
-        }), () => console.log(this.state.note.style))
+        }))
     }
     onChangeType = (type, txt) => {
         console.log('Type:', type)
@@ -99,13 +98,13 @@ export class EditNote extends React.Component {
         const { note, fileInputTxt } = this.state
         if (!note) return null
         return <div className="edit-note " style={note.style}>
-            <input type="text" placeholder="Enter Your Title" name="title" value={note.title} data-parent onChange={this.handleChange} />
+            <input style={{...note.style,backgroundColor:'transparent'}} type="text" placeholder="Enter Your Title" name="title" value={note.title} data-parent onChange={this.handleChange} />
             <div className="edit-content">
                 {(note.type === 'NoteText') ?
                     <textarea style={note.style} value={note.info.txt} name="txt" data-parent="info" onChange={this.handleChange}></textarea>
                     : <DynamicNote info={note.info} note={note} {...this.props} type={note.type} />}
             </div>
-            {(note.type === 'NoteTodo' || note.type === 'NoteText') && <StyleEditBar note={note} handleChange={this.handleChange} />}
+           <StyleEditBar note={note} handleChange={this.handleChange} />
             <div className="edit-btns">
                 <button onClick={() => this.toggleFileInput('NoteImg')}><IconImage /></button>
                 <IconPalette note={note} style={note.style} updateColor={this.handleChange} mode={'freeSelection'}/>

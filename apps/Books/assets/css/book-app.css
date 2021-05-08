@@ -5,7 +5,8 @@
     margin-bottom: 1rem;
     /* width: fit-content; */
     background-color: rgb(236, 235, 235);
-    border-radius: 2em;
+   
+    flex-direction: column;
 }
 .filter-books input{
     height: 2rem;
@@ -16,13 +17,16 @@
     
 }
 .filter-books input[type="search"]{
-    flex-grow: 1;
-    max-width:400px;
+   flex-grow: 1;
     margin-inline-end: 2rem;
     margin-inline-start: 2em;
+    margin-bottom: 0.5rem;
 }
 .filter-books input[type="number"]{
     width: 4rem;
+}
+.price-filter{
+    margin-inline-start: 2em;
 }
 
 .book-list{
@@ -71,4 +75,16 @@ margin-bottom: 1rem;
     object-fit: contain;
     display: block;
     margin-bottom: 0.25rem;
+}
+
+@media screen and (min-width:480px){
+    .filter-books{
+        flex-direction: row;
+        border-radius: 2em;
+    }
+    .filter-books input[type="search"]{
+        flex-grow: 1;
+        max-width:480px;
+        margin-bottom: 0;
+    }
 }
