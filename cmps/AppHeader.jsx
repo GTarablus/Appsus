@@ -4,8 +4,8 @@ export function AppHeader() {
   return (
     <div className="app-header  main-container">
       <div className="logo">
-        <img src="" alt="" />
-        <h1>Appsus</h1>
+        <img src="../assets/img/logo.svg" alt="" />
+       
       </div>
 
       <nav className="flex">

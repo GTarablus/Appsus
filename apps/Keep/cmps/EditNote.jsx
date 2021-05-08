@@ -111,13 +111,13 @@ export class EditNote extends React.Component {
                 <button onClick={() => this.onChangeType('NoteText')}><IconText /></button>
                 <button onClick={() => this.onChangeType('NoteTodo')} ><IconTodo /> </button>
                 <button onClick={() => this.toggleFileInput('NoteVideo')}><IconVideo /></button>
-            </div>
             {this.state.isFileInput && <div class="file-input-field">
-                <input type="text" value={fileInputTxt} name="fileInputTxt" onChange={this.handleChange} placeholder="Insert a vail url... "
+                <input type="text" value={fileInputTxt} name="fileInputTxt" onChange={this.handleChange} placeholder="Insert a valid url... "
                     onBlur={() => this.setState({ isFileInput: false })}
-                />
+                    />
                 <button onClick={this.onAddFile}>Add</button>
             </div>}
+                    </div>
             <div className="action-btns">
                 <button onClick={this.onCloseEdit}>Cancel</button>
                 <button onClick={this.onSubmitEdit}>Save</button>

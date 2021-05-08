@@ -12,7 +12,7 @@ export function Home() {
           <IconEmail />
           <div className="home-contnent">
             <h3>Redefining Email</h3>
-            <p>Get the most out of your inbox with AppsusMail. A comprehensive e-mail management system you can rely on. Pin emails, save sort and filter them as your liking. Your email - your decisio. Get staerted and change your email communication forever. </p>
+            <p>Get the most out of your inbox with AppsusMail. A comprehensive e-mail management system you can rely on. Pin emails, save, sort and filter them as your liking. Your email - your decisio. Get staerted and change your email communication forever. </p>
             <Link to="/email"> Get Started </Link>
           </div>
         </div>
