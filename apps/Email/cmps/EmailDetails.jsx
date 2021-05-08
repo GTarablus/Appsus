@@ -1,5 +1,6 @@
 import { emailService } from '../services/email-service.js';
 import { utilService } from '../../../services/util-service.js';
+import { IconBack } from '../cmps/icon-cmps/IconBack.jsx';
 export function EmailDetails(props) {
   const emailId = props.match.params.id;
   const email = props.emails.find((email) => {
@@ -7,7 +8,9 @@ export function EmailDetails(props) {
   });
   return (
     <div className="email-details">
-      <button onClick={() => props.history.push('/email')}>Back</button>
+      <button onClick={() => props.history.push('/email')}>
+        <IconBack />
+      </button>
       <div>
         <h2>{email.sender}</h2>
         <h3>{email.subject}</h3>

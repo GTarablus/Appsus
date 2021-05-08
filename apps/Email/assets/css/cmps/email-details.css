@@ -17,3 +17,8 @@ h4 {
 .email-details button {
   align-self: flex-start;
 }
+
+.email-details svg {
+  width: 20px;
+  height: 20px;
+}

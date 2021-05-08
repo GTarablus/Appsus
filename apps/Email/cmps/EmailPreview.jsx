@@ -6,6 +6,8 @@ import { IconForward } from '../cmps/icon-cmps/IconForward.jsx';
 import { IconTrash } from '../cmps/icon-cmps/IconTrash.jsx';
 import { IconRead } from '../cmps/icon-cmps/IconRead.jsx';
 import { IconUnread } from '../cmps/icon-cmps/IconUnread.jsx';
+import { IconInbox } from '../cmps/icon-cmps/IconInbox.jsx';
+
 export function EmailPreview({
   email,
   onDeleteEmail,
@@ -81,9 +83,10 @@ export function EmailPreview({
               ev.stopPropagation();
               onRestoreEmail(email.id);
             }}
+            title="Send to Inbox"
           >
             {' '}
-            Send to inbox
+            <IconInbox />
           </button>
         ) : null}
         <button

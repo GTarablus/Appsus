@@ -1,6 +1,7 @@
 .email-app {
   font-family: SourceSansPro;
   transition: 0.3s;
+  background-color: white;
 }
 
 .dark {
@@ -43,12 +44,14 @@ button:hover {
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
   padding: 3px;
+  background-color: inherit;
 }
 
 .email-display {
   display: flex;
   flex-direction: row;
   height: 700px;
+  background-color: inherit;
 }
 
 /*------------------ Switch --------------- */
