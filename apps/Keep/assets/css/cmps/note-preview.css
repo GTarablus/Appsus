@@ -19,7 +19,7 @@
 }
 .note-preview h3{
     margin: 0;
-    padding:0 0.5rem 0;
+    padding:0.5rem 0;
     text-align: center;
     flex-grow:1;
 }
