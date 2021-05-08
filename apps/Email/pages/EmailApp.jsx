@@ -104,7 +104,7 @@ export class EmailApp extends React.Component {
     return (
       <section className={`email-app ${darkMode ? 'dark' : ''}`}>
         <div className="email-greet">
-          <h3 className="dark-toggle-text">Toggle Dark Mode:</h3>
+          <h3 className="dark-toggle-text">Toggle Dark Mode: </h3>
           <label className="switch">
             <input type="checkbox" onClick={this.toggleDark} />
             <span className="slider round"></span>

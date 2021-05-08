@@ -1,7 +1,7 @@
 .list-actions {
   display: flex;
   justify-content: space-between;
-  padding: 5px 0px 5px 70px;
+  padding: 5px 0px 5px 35px;
   border-bottom: 0.5px solid rgb(212, 212, 212);
 }
 
@@ -11,6 +11,7 @@
   justify-content: space-between;
   align-items: center;
   width: 1000px;
+  height: 50px;
   flex-grow: 2;
 }
 .email-filter input,
@@ -25,4 +26,12 @@ select {
 .compose-button-container {
   flex: grow 1;
   min-width: 300px;
+}
+
+.compose-button,
+.clear-filter {
+  border: 0.5px solid rgb(212, 212, 212);
+  border-radius: 8px;
+  width: 90px;
+  height: 40px;
 }

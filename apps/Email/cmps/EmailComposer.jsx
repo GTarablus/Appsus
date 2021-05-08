@@ -113,13 +113,13 @@ export class EmailComposer extends React.Component {
             value={body}
             onChange={this.handleChange}
           ></textarea>
+        </form>
+        <div className="composer-actions">
           <Link to="/email">
             <button type="button" onClick={this.onSendEmail}>
               Send
             </button>
           </Link>
-        </form>
-        <div className="compose-actions">
           <Link to={`/keep?title=${subject}&body=${body}`}>
             <button>Send to Note</button>
           </Link>

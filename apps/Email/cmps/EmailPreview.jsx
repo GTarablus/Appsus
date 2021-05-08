@@ -1,6 +1,11 @@
 const { Link } = ReactRouterDOM;
 import { utilService } from '../../../services/util-service.js';
-
+import { IconStar } from '../cmps/icon-cmps/IconStar.jsx';
+import { IconReply } from '../cmps/icon-cmps/IconReply.jsx';
+import { IconForward } from '../cmps/icon-cmps/IconForward.jsx';
+import { IconTrash } from '../cmps/icon-cmps/IconTrash.jsx';
+import { IconRead } from '../cmps/icon-cmps/IconRead.jsx';
+import { IconUnread } from '../cmps/icon-cmps/IconUnread.jsx';
 export function EmailPreview({
   email,
   onDeleteEmail,
@@ -35,7 +40,9 @@ export function EmailPreview({
               email.from
             }`}
           >
-            <button>Reply</button>
+            <button title="Reply">
+              <IconReply />
+            </button>
           </Link>
         ) : null}
 
@@ -44,22 +51,30 @@ export function EmailPreview({
             email.body
           }`}
         >
-          {!email.isDraft ? <button>Forward</button> : null}
+          {!email.isDraft ? (
+            <button title="Forward">
+              <IconForward />
+            </button>
+          ) : null}
         </Link>
         <button
           onClick={(ev) => {
             ev.stopPropagation();
             onDeleteEmail(email.id);
           }}
+          title="Send to Trash"
         >
-          Delete
+          <IconTrash />
         </button>
         <button
           onClick={(ev) => {
             ev.stopPropagation();
             toggleRead(email.id);
           }}
-        >{`Mark as ${email.isRead ? 'unread' : 'read'}`}</button>
+          title={email.isRead ? 'Mark as Unread' : 'Mark as Read'}
+        >
+          {email.isRead ? <IconRead /> : <IconUnread />}
+        </button>
         {email.isTrash ? (
           <button
             onClick={(ev) => {
@@ -79,7 +94,7 @@ export function EmailPreview({
           }}
         >
           {' '}
-          Star
+          <IconStar />
         </button>
         {email.isDraft ? (
           <Link to={`/email/compose/${email.id}`}>
