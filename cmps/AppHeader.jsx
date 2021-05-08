@@ -1,20 +1,14 @@
 const { NavLink } = ReactRouterDOM
-import {IconApps} from './IconApps.jsx';
+import { NavApps} from './NavApps.jsx';
 export function AppHeader() {
     return <div className="app-header  main-container">
         <div className="logo">
             <img src="" alt="" />
             <h1>Apsus</h1>
         </div>
-        <nav>
-            {/* <IconApps/> */}
-            <ul className="clean-list">
-           <li> <NavLink to="/"> Home</NavLink></li>
-        <li><NavLink to="/email"> Email</NavLink></li>
-        <li> <NavLink to="/keep">Keep</NavLink></li>
-        <li> <NavLink to="/book">Books</NavLink></li>
-        <li> <NavLink to="/">About</NavLink></li>
-            </ul>
+    
+        <nav className="flex">
+        <NavApps/>       
         </nav>
     </div>
      }

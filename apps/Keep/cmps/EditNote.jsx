@@ -43,7 +43,7 @@ export class EditNote extends React.Component {
         this.props.history.push('/keep')
     }
     handleChange = ({ target }) => {
-        console.log('in Handle Change ',target.name)
+        console.log('in Handle Change ',target)
         const field = target.name
         const value = target.value
         const parentKey = target.dataset.parent
@@ -98,7 +98,7 @@ export class EditNote extends React.Component {
     render() {
         const { note, fileInputTxt } = this.state
         if (!note) return null
-        return <div className="edit-note" style={note.style}>
+        return <div className="edit-note " style={note.style}>
             <input type="text" placeholder="Enter Your Title" name="title" value={note.title} data-parent onChange={this.handleChange} />
             <div className="edit-content">
                 {(note.type === 'NoteText') ?

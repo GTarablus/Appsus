@@ -6,8 +6,8 @@
 }
 .icon-palette span{
     border-radius: 50%;
-    flex-grow: 1;
-    height: 20px;
+    width: 1.25rem;
+    height: 1.25rem;
     margin: 4px;
     border: 1px solid #00000026
 }

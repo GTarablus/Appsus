@@ -20,10 +20,7 @@ margin: 0;
 .app-header li{
     margin-inline-start: 1rem;
 }
-.app-header .icon-apps svg{
-    width:2rem;
-    height: 2rem;
-}
+
 .icon-apps{
     align-self: center;
 }

@@ -16,6 +16,7 @@
 .todo-preview span{
     flex-grow: 1;
     align-self: center;
+    font-size: inherit;
 }
 .todo-preview button{
 background-color: rgb(221, 216, 216);

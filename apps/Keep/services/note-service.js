@@ -1,4 +1,6 @@
 import { utilService } from '../../../services/util-service.js'
+import {storageService} from '../../../services/storage-service.js'
+
 export const noteService = {
     query,
     saveNote,
@@ -10,73 +12,84 @@ export const noteService = {
     updateColorById
 }
 
-let gNotes = [
-    {
-        id: utilService.makeId(),
-        isPinned: false,
-        title: '',
-        type: 'NoteText',
-        info: {
-            txt: 'Fullstack Me Baby!'
-        },
-        style: {
-            backgroundColor: '#ffffff',
-           color: 'black',
-           fontSize:'14px',
-           fontFamily:'sans-serif',
-           textAlign:'center'
-       }
-    },
-    {
-        id: utilService.makeId(),
-        title: '',
-        isPinned: false,
-        type: 'NoteVideo',
-        info: {
-            url: 'https://www.youtube.com/watch?v=8ucz_pm3LX8',
+
+let gNotes;
+const NOTES_KEY='notes'
+
+
+
+
+function _createNotes(){
+
+    const notes = [
+        {
+            id: utilService.makeId(),
+            isPinned: false,
             title: '',
-            videoId: '8ucz_pm3LX8'
-        },
-        style:{
-            backgroundColor: '#ffffff',
-           color: 'black',
-           fontSize:'14px',
-           fontFamily:'sans-serif',
-           textAlign:'center'
-       }
-    },
-    {
-        id: utilService.makeId(),
-        label: 'Todos',
-        type: 'NoteTodo',
-        title: '',
-        isPinned: false,
-        info: {
-            todos: [{
-                txt: 'sleep',
-                id: utilService.makeId(),
-                doneAt: null
+            type: 'NoteText',
+            info: {
+                txt: 'Fullstack Me Baby!'
             },
-            {
-                txt: 'Finish This Sprint',
-                id: utilService.makeId(),
-                doneAt: null
-            },
-            {
-                txt: `Don't Forget to eat (again)`,
-                id: utilService.makeId(),
-                doneAt: null
+            style: {
+                backgroundColor: '#ffffff',
+                color: 'black',
+                fontSize:'14px',
+                fontFamily:'sans-serif',
+                
+                textAlign:'center'
             }
+        },
+        {
+            id: utilService.makeId(),
+            title: '',
+            isPinned: false,
+            type: 'NoteVideo',
+            info: {
+                url: 'https://www.youtube.com/watch?v=8ucz_pm3LX8',
+                title: '',
+                videoId: '8ucz_pm3LX8'
+            },
+            style:{
+                backgroundColor: '#ffffff',
+                color: 'black',
+                fontSize:'14px',
+                fontFamily:'sans-serif',
+                textAlign:'center'
+            }
+        },
+        {
+            id: utilService.makeId(),
+            label: 'Todos',
+            type: 'NoteTodo',
+            title: '',
+            isPinned: false,
+            info: {
+                todos: [{
+                    txt: 'sleep',
+                    id: utilService.makeId(),
+                    doneAt: null
+                },
+                {
+                    txt: 'Finish This Sprint',
+                    id: utilService.makeId(),
+                    doneAt: null
+                },
+                {
+                    txt: `Don't Forget to eat (again)`,
+                    id: utilService.makeId(),
+                    doneAt: null
+                }
             ]
         },
         style:{
             backgroundColor: '#ffffff',
-           color: 'black',
-           fontSize:'14px',
-           fontFamily:'sans-serif',
-           textAlign:'center'
-       }
-
+            color: 'black',
+            fontSize:'14px',
+            
+            fontFamily:'sans-serif',
+            textAlign:'center'
+        }
+        
     },
     {
         id: utilService.makeId(),
@@ -90,15 +103,22 @@ let gNotes = [
         },
         style: {
             backgroundColor: '#ffffff',
-           color: 'black',
-           fontSize:'14px',
-           fontFamily:'sans-serif',
-           textAlign:'center'
-       }
+            color: 'black',
+            fontSize:'14px',
+            
+            fontFamily:'sans-serif',
+            textAlign:'center'
+        }
     }
 ]
+gNotes=notes;
+}
 
 function query(filterBy) {
+    const notes=storageService.loadFromStorage(NOTES_KEY)
+    if(!notes|| !notes.length) _createNotes();
+    else gNotes=notes
+
     
     if (!filterBy) return Promise.resolve(gNotes)
     const { txt } = filterBy
@@ -130,6 +150,7 @@ function _updateNote(noteToUpdate) {
     console.log('note of the todo note', noteToUpdate)
     const noteIdx = gNotes.findIndex(note => note.id === noteToUpdate.id)
     gNotes.splice(noteIdx, 1, noteToUpdate)
+    _saveNotesToStorage();
     return Promise.resolve()
 }
 
@@ -147,11 +168,13 @@ function _addNote(note) {
              backgroundColor: '#ffffff',
             color: 'black',
             fontSize:'14px',
+      
             fontFamily:'sans-serif',
             textAlign:'center'
         }
     }
     gNotes.unshift(addedNote)
+    _saveNotesToStorage()
     return Promise.resolve()
 
 
@@ -161,6 +184,7 @@ function updateNoteStyleById(noteId, style) {
     console.log(style)
     const note = gNotes.find(note => noteId === note.id)
     note.style = style;
+    _saveNotesToStorage();
     return Promise.resolve()
 }
 function updateColorById(noteId,bgColor){
@@ -228,6 +252,10 @@ function _isNoteInFilter(note, txt) {
     if (note.type === 'NoteText' && note.info.txt.toUpperCase().includes(txt)) return true
     if (note.type === 'NoteTodo' && note.info.todos.some(todo => todo.txt.toUpperCase().includes(txt))) return true
     return false
+}
+
+function _saveNotesToStorage(){
+    storageService.saveToStorage(NOTES_KEY,gNotes)
 }
 
 function removeNoteById(noteId) {
