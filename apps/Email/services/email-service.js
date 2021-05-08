@@ -98,10 +98,16 @@ function filterEmails(filterBy) {
   if (!sender) sender = '';
   if (!date) date = '';
   var filteredEmails = gEmails.filter((email) => {
-    return email.sender.toLowerCase().includes(sender.toLowerCase()) &&
-      email.sentDate
-      ? email.sentDate.includes(date)
-      : true;
+    return (
+      (email.sender.toLowerCase().includes(sender.toLowerCase()) ||
+        email.subject
+          .toLowerCase()
+          .includes(
+            sender.toLowerCase() ||
+              email.body.toLowerCase().includes(sender.toLowerCase())
+          )) &&
+      (email.sentDate ? email.sentDate.includes(date) : true)
+    );
   });
   if (showRead === 'showAll') return filteredEmails;
   else {

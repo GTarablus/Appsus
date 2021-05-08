@@ -1,7 +1,28 @@
+.list-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0px 5px 70px;
+  border-bottom: 0.5px solid rgb(212, 212, 212);
+}
+
 .email-filter {
   display: flex;
   align-self: flex-end;
   justify-content: space-between;
   align-items: center;
   width: 1000px;
+  flex-grow: 2;
+}
+.email-filter input,
+select {
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  width: 200px;
+  background-color: inherit;
+  color: inherit;
+}
+
+.compose-button-container {
+  flex: grow 1;
+  min-width: 300px;
 }

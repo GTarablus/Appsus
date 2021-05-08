@@ -1,6 +1,7 @@
 .email-preview {
   min-height: 200px;
-  border: solid 1px black;
+  position: relative;
+  border: 0.5px solid rgb(212, 212, 212);
 }
 
 .preview-content {
@@ -11,12 +12,15 @@
 .email-preview * {
   margin: 5px;
   text-decoration: none;
-  color: black;
+  color: inherit;
 }
 
 .email-preview:hover {
   cursor: pointer;
-  box-shadow: inset 0 0px 3px 6px #ffb0fb78;
+  /* box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; */
+  box-shadow: rgba(61, 61, 61, 0.25) 0px 54px 55px,
+    rgba(61, 61, 61, 0.12) 0px -12px 30px, rgba(61, 61, 61, 0.12) 0px 4px 6px,
+    rgba(61, 61, 61, 0.17) 0px 12px 13px, rgba(61, 61, 61, 0.09) 0px -3px 5px;
   transition: 0.3s;
 }
 
@@ -33,9 +37,7 @@
 }
 
 .unread {
-  box-shadow: inset 0 0px 3px 6px #56a5ff78;
   font-weight: bold;
-  background-color: white;
 }
 
 .starred {

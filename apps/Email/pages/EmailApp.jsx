@@ -12,6 +12,7 @@ export class EmailApp extends React.Component {
     view: 'inbox',
     filterBy: null,
     sortBy: null,
+    darkMode: false,
   };
 
   componentDidMount() {
@@ -75,6 +76,10 @@ export class EmailApp extends React.Component {
     });
   }
 
+  toggleDark = () => {
+    if (this.state.darkMode) this.setState({ darkMode: false });
+    else this.setState({ darkMode: true });
+  };
   setEmailsForDisplay = () => {
     const { emails, view } = this.state;
     if (view === 'inbox')
@@ -88,7 +93,7 @@ export class EmailApp extends React.Component {
   };
 
   render() {
-    const { emails, unreadCount } = this.state;
+    const { emails, unreadCount, darkMode } = this.state;
     if (!emails) {
       return (
         <section>
@@ -97,10 +102,14 @@ export class EmailApp extends React.Component {
       );
     }
     return (
-      <section>
+      <section className={`email-app ${darkMode ? 'dark' : ''}`}>
         <div className="email-greet">
-          <h1>Appsus</h1>
-          <h2>Welcome to Email!</h2>
+          <h3 className="dark-toggle-text">Toggle Dark Mode:</h3>
+          <label className="switch">
+            <input type="checkbox" onClick={this.toggleDark} />
+            <span className="slider round"></span>
+          </label>
+          <h1>Welcome to Email!</h1>
         </div>
         <div className="emails-main-container">
           <EmailFilter
