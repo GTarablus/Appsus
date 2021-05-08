@@ -5,6 +5,10 @@
 @import './cmps/email-filter.css';
 @import './cmps/email-composer.css';
 @import './pages/EmailApp.css';
+@font-face {
+  font-family: SourceSansPro;
+  src: url('../fonts/SourceSansPro-Regular.ttf');
+}
 
 * {
   box-sizing: border-box;
