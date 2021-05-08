@@ -108,7 +108,7 @@ export class EditNote extends React.Component {
             {(note.type === 'NoteTodo' || note.type === 'NoteText') && <StyleEditBar note={note} handleChange={this.handleChange} />}
             <div className="edit-btns">
                 <button onClick={() => this.toggleFileInput('NoteImg')}><IconImage /></button>
-                <IconPalette note={note} style={note.style} updateColor={this.handleChange} />
+                <IconPalette note={note} style={note.style} updateColor={this.handleChange} mode={'freeSelection'}/>
                 <button onClick={() => this.onChangeType('NoteText')}><IconText /></button>
                 <button onClick={() => this.onChangeType('NoteTodo')} ><IconTodo /> </button>
                 <button onClick={() => this.toggleFileInput('NoteVideo')}><IconVideo /></button>

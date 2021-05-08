@@ -54,6 +54,7 @@ input[type="color"]{
 .note-preview-buttons{
     display: flex;
     justify-content: space-around;
+    position: relative;
 }
 .note-preview-buttons,.note-preview .pin-btn{
     opacity: 0;
@@ -67,6 +68,9 @@ input[type="color"]{
 }
 
 .note-preview:hover .note-preview-buttons,.note-preview:hover .pin-btn{
+    opacity: 1;
+}
+.note-preview-buttons>.icon-palette input:checked{
     opacity: 1;
 }
 .note-preview .note-map+.note-preview-buttons{

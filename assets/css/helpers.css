@@ -7,6 +7,19 @@
     list-style-type: none;
     display: flex;
 }
+.flex{
+    display: flex;
+}
+.center-margin{
+    margin: 0 auto;
+}
+.container{
+    max-width: 1040px;
+    margin:0 auto;
+}
+.space-between{
+    justify-content: space-between;
+}
 #root{
     min-height: 100vh;
 }
