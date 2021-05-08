@@ -18,9 +18,7 @@
 .email-preview:hover {
   cursor: pointer;
   /* box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px; */
-  box-shadow: rgba(61, 61, 61, 0.25) 0px 54px 55px,
-    rgba(61, 61, 61, 0.12) 0px -12px 30px, rgba(61, 61, 61, 0.12) 0px 4px 6px,
-    rgba(61, 61, 61, 0.17) 0px 12px 13px, rgba(61, 61, 61, 0.09) 0px -3px 5px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   transition: 0.3s;
 }
 
@@ -30,6 +28,8 @@
 
 .quick-actions {
   display: none;
+  position: absolute;
+  bottom: 0;
 }
 
 .read {

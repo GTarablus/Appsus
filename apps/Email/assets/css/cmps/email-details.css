@@ -2,10 +2,17 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 80%;
-  border: solid 1px black;
+  width: 100%;
+  padding: 10px 20px;
   height: 1000px;
   overflow: auto;
+}
+
+.email-details h2,
+h3,
+h4 {
+  border-bottom: 0.5px solid rgb(212, 212, 212);
+  width: fit-content;
 }
 
 .email-details button {
