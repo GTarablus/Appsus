@@ -29,6 +29,8 @@ h4 {
 textarea {
   border: transparent;
   border-bottom: 1px black solid;
+  background-color: inherit;
+  color: inherit;
 }
 
 .compose-header {
