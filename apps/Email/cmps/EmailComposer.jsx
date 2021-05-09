@@ -37,7 +37,6 @@ export class EmailComposer extends React.Component {
 
   checkReceivedEmail() {
     var id = this.props.match.params.id;
-    console.log(id);
     if (id) {
       emailService.getEmailById(id).then((email) => {
         this.setState({ sentEmail: email });

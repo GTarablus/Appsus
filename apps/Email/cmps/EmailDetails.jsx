@@ -12,7 +12,6 @@ import { IconUnread } from '../cmps/icon-cmps/IconUnread.jsx';
 import { IconInbox } from '../cmps/icon-cmps/IconInbox.jsx';
 
 export function EmailDetails(props) {
-  console.log(props);
   const emailId = props.match.params.id;
   const email = props.emails.find((email) => {
     return email.id === emailId;
