@@ -33,8 +33,8 @@ function getEmails() {
         subject: 'Another exclusive mission from Tony..',
         to: 'pepper@starkIndustries.im',
 
-        body: `Hey Miss Pepper.
-          Tony asked me to get him some "Afkat Hashmal" for his new suit.
+        body: `Hey Miss Pepper.\
+          Tony asked me to get him some "Afkat Hashmal" for his new suit. \
           I have a feeling he's messing with me but I want I'm afraid of being wrong again.
           If it's real could you ask Happy to get me some?
           Thanks, Spidey`,

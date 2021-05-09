@@ -12,6 +12,7 @@ import { IconUnread } from '../cmps/icon-cmps/IconUnread.jsx';
 import { IconInbox } from '../cmps/icon-cmps/IconInbox.jsx';
 
 export function EmailDetails(props) {
+  console.log(props);
   const emailId = props.match.params.id;
   const email = props.emails.find((email) => {
     return email.id === emailId;
@@ -68,7 +69,7 @@ export function EmailDetails(props) {
         <button
           onClick={(ev) => {
             ev.stopPropagation();
-            toggleRead(email.id);
+            props.toggleRead(email.id);
           }}
           title={email.isRead ? 'Mark as Unread' : 'Mark as Read'}
         >
@@ -90,7 +91,7 @@ export function EmailDetails(props) {
           className={email.isStarred ? 'starred' : ''}
           onClick={(ev) => {
             ev.stopPropagation();
-            onStarEmail(email.id);
+            props.onStarEmail(email.id);
           }}
         >
           {' '}
