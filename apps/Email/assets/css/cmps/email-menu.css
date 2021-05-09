@@ -32,6 +32,11 @@
   font-weight: bolder;
   color: #c24387;
 }
+
+.email-menu li svg {
+  width: 25px;
+  height: 25px;
+}
 .clean-list {
   list-style: none;
   padding: 0;

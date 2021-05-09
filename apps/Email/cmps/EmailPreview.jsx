@@ -7,6 +7,7 @@ import { IconTrash } from '../cmps/icon-cmps/IconTrash.jsx';
 import { IconRead } from '../cmps/icon-cmps/IconRead.jsx';
 import { IconUnread } from '../cmps/icon-cmps/IconUnread.jsx';
 import { IconInbox } from '../cmps/icon-cmps/IconInbox.jsx';
+import { IconEditEmail } from './icon-cmps/IconEditEmail.jsx';
 
 export function EmailPreview({
   email,
@@ -102,7 +103,9 @@ export function EmailPreview({
         </button>
         {email.isDraft ? (
           <Link to={`/email/compose/${email.id}`}>
-            <button>Edit</button>{' '}
+            <button>
+              <IconEditEmail />
+            </button>{' '}
           </Link>
         ) : null}
       </div>
