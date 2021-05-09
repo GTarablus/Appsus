@@ -12,10 +12,15 @@ function getEmails() {
         id: utilService.makeId(),
         sender: 'Kratos of Sparta',
         from: 'godofwar@olympus.gov',
-        subject: 'Email 1',
-        to: 'r&d@apssus.com',
-        body:
-          'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
+        subject: 'The True Spartan',
+        to: 'MasterChief117@microsoft.com',
+        body: `
+        Let's end this console war.
+        You and me.
+        Let's see who the real Spartan is.
+        Winner takes all.
+        Best of 5 Mario Kart.
+        Kratos`,
         isRead: false,
         sentAt: 1525074698,
         sentTime: utilService.getTimeFromStamp(1525074698),
@@ -25,11 +30,14 @@ function getEmails() {
         id: utilService.makeId(),
         sender: 'Peter Parker',
         from: 'underoos@starkindustries.com',
-        subject: 'Email 2',
-        to: 'r&d@apssus.com',
+        subject: 'Another exclusive mission from Tony..',
+        to: 'pepper@starkIndustries.im',
 
-        body:
-          'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
+        body: `Hey Miss Pepper.
+          Tony asked me to get him some "Afkat Hashmal" for his new suit.
+          I have a feeling he's messing with me but I want I'm afraid of being wrong again.
+          If it's real could you ask Happy to get me some?
+          Thanks, Spidey`,
         isRead: false,
         sentAt: 1549312452,
         sentTime: utilService.getTimeFromStamp(1549312452),
@@ -39,11 +47,13 @@ function getEmails() {
         id: utilService.makeId(),
         sender: 'Argaorn, son of Arathorn',
         from: 'king@gondor.me',
-        subject: 'Email 3',
-        to: 'r&d@apssus.com',
+        subject: 'Those damn Hobbits again...',
+        to: 'theNewWhiteWizard@.whitecouncil.me',
 
-        body:
-          'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
+        body: `Gandalf, have you seen Merry and Pippin? They said something about a Pakal Cafe near Rohan.
+        I'm afraid they may have gotten into our secret Longbottom Leaf stash again...
+        Send Sam to make sure they find their way home.
+        Strider `,
         isRead: false,
         sentAt: 1569312452,
         sentTime: utilService.getTimeFromStamp(1569312452),
@@ -53,10 +63,15 @@ function getEmails() {
         id: utilService.makeId(),
         sender: 'Nemo Bemo',
         from: 'hungry@feedme.now',
-        subject: 'Email 4',
-        to: 'r&d@apssus.com',
-        body:
-          'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
+        subject: 'We were attacked',
+        to: 'gil@appsus.com',
+        body: `Yo dude.
+          Someone fucked up the garden again.
+          Terrible mess. Plants everywhere. There was an even a cushion there somewhere.
+          Someone may have actually shat in the back.
+          Better clean it up man.
+          Yours, Nembuz
+          P.S. I'm hungry.`,
         isRead: false,
         sentAt: 1599645452,
         sentTime: utilService.getTimeFromStamp(1599645452),
@@ -66,10 +81,13 @@ function getEmails() {
         id: utilService.makeId(),
         sender: 'Tal Tarablus',
         from: 'fatfuck@siblings.com',
-        subject: 'Email 5',
-        to: 'r&d@apssus.com',
-        body:
-          'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente praesentium impedit quasi at omnis. Ducimus omnis amet nihil officiis suscipit.',
+        subject: 'Sibs Nightttt',
+        to: 'fatcow@siblings.com',
+        body: `When we doing sibs night again?
+        I make cookies, you and Gilbert make Bacon Mac & Cheese.
+        Let's get 3rd Sib high and watch The Office.
+        Nemo the 4th included.
+        -2nd Rank Bro `,
         isRead: false,
         sentAt: 3136253789,
         sentTime: utilService.getTimeFromStamp(3136253789),

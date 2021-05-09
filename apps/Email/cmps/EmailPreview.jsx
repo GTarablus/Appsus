@@ -24,6 +24,7 @@ export function EmailPreview({
         <div className="details-preivew">
           <h2 className="sender">{email.sender}</h2>
           <h4 className="from">{email.isSent ? email.to : email.from}</h4>
+          <h4 className="preview-to">To: {email.to}</h4>
           <h3>{email.subject}</h3>
           <p>{email.body}</p>
         </div>

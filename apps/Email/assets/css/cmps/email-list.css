@@ -3,8 +3,9 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 90%;
-  height: auto;
+  /* height: auto; */
   overflow: auto;
+  height: 62.5rem;
 }
 
 .empty {
