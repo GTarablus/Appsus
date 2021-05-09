@@ -9,10 +9,12 @@ export function EmailMenu({ onSetView, unreadCount }) {
   return (
     <div className="email-menu">
       <ul className="menu-actions clean-list">
-        <li onClick={() => onSetView('inbox')}>
-          <IconInbox />
-          {`Inbox (${unreadCount})`}
-        </li>
+        <Link to="/email">
+          <li onClick={() => onSetView('inbox')}>
+            <IconInbox />
+            {`Inbox (${unreadCount})`}
+          </li>
+        </Link>
         <li onClick={() => onSetView('sent')}>
           <IconOutbox />
           {'  '}Outbox

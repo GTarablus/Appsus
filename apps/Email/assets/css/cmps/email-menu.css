@@ -43,3 +43,7 @@
   list-style-type: none;
   margin: 0;
 }
+
+.email-menu a {
+  width: 100%;
+}
