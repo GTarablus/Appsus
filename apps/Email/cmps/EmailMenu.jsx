@@ -8,30 +8,30 @@ import { IconOutbox } from './icon-cmps/IconOutbox.jsx';
 export function EmailMenu({ onSetView, unreadCount }) {
   return (
     <div className="email-menu">
-      <ul className="menu-actions clean-list">
-        <Link to="/email">
-          <li onClick={() => onSetView('inbox')}>
+      <div className="menu-actions">
+        <div className="email-menu-button" onClick={() => onSetView('inbox')}>
+          <Link to="/email">
             <IconInbox />
             {`Inbox (${unreadCount})`}
-          </li>
-        </Link>
-        <li onClick={() => onSetView('sent')}>
+          </Link>
+        </div>
+        <div className="email-menu-button" onClick={() => onSetView('sent')}>
           <IconOutbox />
           {'  '}Outbox
-        </li>
-        <li onClick={() => onSetView('drafts')}>
+        </div>
+        <div className="email-menu-button" onClick={() => onSetView('drafts')}>
           <IconEditEmail />
           {'  '}Drafts
-        </li>
-        <li onClick={() => onSetView('starred')}>
+        </div>
+        <div className="email-menu-button" onClick={() => onSetView('starred')}>
           <IconStar />
           {'  '}Starred
-        </li>
-        <li onClick={() => onSetView('trash')}>
+        </div>
+        <div className="email-menu-button" onClick={() => onSetView('trash')}>
           <IconTrash />
           {'  '}Trash
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   );
 }

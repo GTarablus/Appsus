@@ -5,7 +5,6 @@
 /* Base */
 @import './base.css';
 
-
 /* EmailApp */
 @import '../../apps/Email/assets/css/main.css';
 /* BookApp */
@@ -22,4 +21,18 @@
 
 /* General CMPS */
 @import './cmps/app-header.css';
+@import './cmps/app-footer.css';
 @import './cmps/nav-apps.css';
+
+body {
+  font-family: system-ui;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-app-container {
+  height: calc(100vh - 80px);
+}

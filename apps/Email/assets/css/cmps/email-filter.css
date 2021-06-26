@@ -1,7 +1,7 @@
 .list-actions {
   display: flex;
   justify-content: space-between;
-  padding: 5px 5px 5px 40px;
+  padding: 5px 5px 5px 20px;
   border-bottom: 0.5px solid rgb(212, 212, 212);
   border: #0051e7 5px solid;
   border-radius: 8px;
@@ -27,8 +27,7 @@ select {
 
 .compose-button-container {
   flex: grow 1;
-  min-width: 300px;
-  min-width: 300px;
+  width: 200px;
   display: flex;
   align-items: center;
   justify-content: flex-start;

@@ -2,6 +2,7 @@
   font-family: SourceSansPro;
   transition: 0.3s;
   background-color: white;
+  height: 100%;
 }
 
 .dark {
@@ -42,18 +43,17 @@ h6 {
 .emails-main-container {
   display: flex;
   flex-direction: column;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
-    rgba(0, 0, 0, 0.22) 0px 15px 12px;
   padding: 3px;
   background-color: inherit;
-  min-height: 85vh;
+  height: 91%;
+  overflow: hidden;
 }
 
 .email-display {
   display: flex;
   flex-direction: row;
-  height: 700px;
   background-color: inherit;
+  max-height: 100%;
 }
 
 /*------------------ Switch --------------- */

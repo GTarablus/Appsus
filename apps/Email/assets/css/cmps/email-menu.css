@@ -15,25 +15,30 @@
   justify-content: space-between;
   align-items: center;
 }
-.menu-actions li:hover {
+.menu-actions div:hover {
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
     rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
     rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
 }
-.menu-actions li {
+.menu-actions div {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 5px;
-  padding-right: 10px;
+  justify-content: start;
+  padding: 0px 10px;
   width: 100%;
   height: 60px;
   font-weight: bolder;
   color: #c24387;
 }
-
-.email-menu li svg {
+.email-menu-button a {
+  display: flex;
+  justify-content: start;
+}
+.email-menu-button {
+  text-align: start;
+}
+.email-menu div svg {
   width: 25px;
   height: 25px;
 }

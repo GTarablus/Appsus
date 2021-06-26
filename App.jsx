@@ -5,6 +5,7 @@ import { BookDetails } from './apps/Books/pages/BookDetails.jsx';
 import { EmailApp } from './apps/Email/pages/EmailApp.jsx';
 import { KeepApp } from './apps/Keep/pages/KeepApp.jsx';
 import { AppHeader } from './cmps/AppHeader.jsx';
+import { AppFooter } from './cmps/AppFooter.jsx';
 
 import { Home } from './pages/Home.jsx';
 
@@ -12,20 +13,18 @@ export function App() {
   return (
     <Router>
       <header>
-    <AppHeader/>
+        <AppHeader />
       </header>
-      <main>
-      <Switch>
-        <Route component={BookDetails} path='/book/:bookId'/>
-        <Route component={BookApp} path='/book'/>
-        <Route component={EmailApp} path='/email' />
-        <Route component={KeepApp} path='/keep' />
-        <Route component={Home} path='/' />
-      </Switch>
+      <main className="main-app-container">
+        <Switch>
+          <Route component={BookDetails} path="/book/:bookId" />
+          <Route component={BookApp} path="/book" />
+          <Route component={EmailApp} path="/email" />
+          <Route component={KeepApp} path="/keep" />
+          <Route component={Home} path="/" />
+        </Switch>
       </main>
-      <footer>
-
-      </footer>
+      <footer></footer>
     </Router>
   );
 }
