@@ -272,7 +272,7 @@ function _addNote(note) {
             textAlign:'center'
         }
     }
-    gNotes.unshift(addedNote)
+    query().then((notes)=>(gNotes=notes))
     _saveNotesToStorage()
     return Promise.resolve()
 
